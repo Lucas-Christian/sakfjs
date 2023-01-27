@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "target": "es2020",                 
+    "module": "commonjs",  
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,       
+    "noImplicitAny": true,                   
+    "strictNullChecks": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "skipLibCheck": true,
+    "moduleResolution": "node",
+    "importsNotUsedAsValues": "error",
+    "resolveJsonModule": true,
+    "types": ["vitest/importMeta", "vitest/globals"]
+  },
+  "exclude": ["node_modules", "src/interfaces", "src/types"]
+}
