@@ -2,20 +2,40 @@
   "name": "sakf",
   "version": "1.0.0",
   "description": "useful functions like a swiss army knife",
-  "main": "dist/index.js",
+  "main": "lib/esm/index.js",
   "scripts": {
-    "start": "node dist/index.js",
+    "start": "node lib/esm/index.js",
     "dev": "tsx src/index.ts",
-    "build": "tsc",
+    "build": "npm run clean && npm run build:esm && npm run build:cjs",
+    "build:esm": "tsc -p ./configs/tsconfig.esm.json && mv lib/esm/index.js lib/esm/index.mjs",
+    "build:cjs": "tsc -p ./configs/tsconfig.cjs.json",
+    "clean": "rimraf ./lib",
     "test": "vitest"
   },
   "license": "ISC",
   "devDependencies": {
+    "rimraf": "^4.1.2",
     "typescript": "^4.9.4",
     "vitest": "^0.28.3"
   },
   "dependencies": {
     "jimp": "^0.16.2",
     "zod": "^3.20.2"
-  }
+  },
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./lib/esm/types/index.d.ts",
+        "default": "./lib/esm/index.mjs"
+      },
+      "require": {
+        "types": "./lib/cjs/types/index.d.ts",
+        "default": "./lib/cjs/index.js"
+      }
+    }
+  },
+  "types": "./lib/cjs/types/index.d.ts",
+  "files": [
+    "lib/**/*"
+  ]
 }

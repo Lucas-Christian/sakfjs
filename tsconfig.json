@@ -1,7 +1,10 @@
 {
   "compilerOptions": {
     "target": "es2020",                 
-    "module": "commonjs",  
+    "module": "commonjs",
+    "rootDir": "src",
+    "outDir": "lib",
+    "declarationDir": "./lib/types",
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "strict": true,       
@@ -11,9 +14,11 @@
     "noUnusedParameters": true,
     "skipLibCheck": true,
     "moduleResolution": "node",
+    "declaration": true,
     "importsNotUsedAsValues": "error",
     "resolveJsonModule": true,
     "types": ["vitest/importMeta", "vitest/globals"]
   },
-  "exclude": ["node_modules", "src/interfaces", "src/types"]
+  "include": ["src"],
+  "exclude": ["node_modules", "vite.config.ts"]
 }

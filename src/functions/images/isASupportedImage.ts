@@ -2,7 +2,7 @@ import type { SupportedMIMEType } from "../../types/SupportedMIMEType";
 import type { SupportedExt } from "../../types/SupportedExt";
 import { supportedFormats } from "../../constants/supportedFormats";
 
-export function isASupportedImage(extOrMIMEType: SupportedMIMEType | SupportedExt) {
+export function isASupportedImage(extOrMIMEType: SupportedMIMEType | SupportedExt): boolean {
   try {
     if(checkByExt() || checkByMIME()) {
       return true;
