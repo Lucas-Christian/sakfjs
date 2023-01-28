@@ -1,4 +1,4 @@
-import type { SupportedMIMEType } from "../../types/SupportedMIMEType";
+import type { SupportedMIMEType } from "../../constants/supportedFormats";
 import { instanceOfBuffer, instanceOfNumber } from "../zod/instanceof";
 import { isASupportedImage } from "./isASupportedImage";
 import { getMIMEType } from "../files/getMIMEType";

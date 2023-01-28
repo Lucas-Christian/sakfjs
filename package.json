@@ -2,7 +2,8 @@
   "name": "sakf",
   "version": "1.0.0",
   "description": "useful functions like a swiss army knife",
-  "main": "lib/esm/index.js",
+  "main": "lib/cjs/index.js",
+  "module": "lib/esm/index.mjs",
   "scripts": {
     "start": "node lib/esm/index.js",
     "dev": "tsx src/index.ts",
@@ -35,6 +36,7 @@
     }
   },
   "types": "./lib/cjs/types/index.d.ts",
+  "type": "module",
   "files": [
     "lib/**/*"
   ]

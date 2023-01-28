@@ -1,4 +1,4 @@
-import type { SupportedExt } from "../../types/SupportedExt";
+import type { SupportedExt } from "../../constants/supportedFormats";
 import { isASupportedImage } from "./isASupportedImage";
 import { supportedFormats } from "../../constants/supportedFormats";
 import { instanceOfBuffer } from "../zod/instanceof";

@@ -1,11 +1,9 @@
 {
   "compilerOptions": {
     "types": ["vitest/importMeta", "vitest/globals"],
-    "exclude": ["node_modules", "vite.config.ts"],
     "forceConsistentCasingInFileNames": true,
     "allowSyntheticDefaultImports": true,
     "importsNotUsedAsValues": "error",
-    "moduleResolution": "node",
     "noUnusedParameters": true,
     "resolveJsonModule": true,
     "strictNullChecks": true,
@@ -15,8 +13,8 @@
     "noImplicitAny": true,                   
     "skipLibCheck": true,
     "declaration": true,
-    "rootDir": "src",
+    "rootDir": "../src",
     "checkJs": true,
-    "strict": true
+    "strict": true,
   }
 }

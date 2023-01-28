@@ -1,6 +1,4 @@
-import type { SupportedMIMEType } from "../../types/SupportedMIMEType";
-import type { SupportedExt } from "../../types/SupportedExt";
-import type { Image } from "../../types/Image";
+import type { SupportedExt, SupportedMIMEType } from "../../constants/supportedFormats";
 import type { Stats } from "fs";
 import { isASupportedImage } from "./isASupportedImage";
 import { join, parse } from "path";
@@ -9,7 +7,15 @@ import { getMIMEType } from "../files/getMIMEType";
 import { isUndefined } from "../zod/directType";
 import { getStat } from "../fs/getStat";
 import { z } from "zod";
-import { supportedFormats } from "../../constants/supportedFormats";
+
+const ImageSchema = z.object({
+  name: z.string(),
+  size: z.number(),
+  path: z.string(),
+  ext: z.string().array().element,
+  mime: z.string().array().element
+});
+type Image = z.TypeOf<typeof ImageSchema>;
 
 /**
  * @function getSupportedImages
@@ -18,19 +24,6 @@ import { supportedFormats } from "../../constants/supportedFormats";
  * @param folderPath 
  * @returns {Promise<Image[]>}
 */
-
-const extSchema = z.enum(Object.keys(supportedFormats)),
-mimeSchema = z.enum(Object.values(supportedFormats));
-
-
-const Image = z.object({
-  name: z.string(),
-  size: z.number(),
-  path: z.string(),
-  ext: extSchema,
-  mime: mimeSchema
-});
-
 
 export async function getSupportedImages(folderPath: string): Promise<Image[]> {
   try {

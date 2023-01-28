@@ -1,5 +1,4 @@
-import type { SupportedMIMEType } from "../../types/SupportedMIMEType";
-import type { SupportedExt } from "../../types/SupportedExt";
+import type { SupportedMIMEType, SupportedExt } from "../../constants/supportedFormats";
 import { supportedFormats } from "../../constants/supportedFormats";
 
 export function isASupportedImage(extOrMIMEType: SupportedMIMEType | SupportedExt): boolean {

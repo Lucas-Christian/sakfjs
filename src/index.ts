@@ -1,4 +1,40 @@
-export * from "./functions/images/exports";
-export * from "./functions/files/exports";
-export * from "./functions/zod/exports";
-export * from "./functions/fs/exports";
+import { 
+  getSupportedImages,
+  isASupportedImage,
+  changeExtension,
+  changeQuality,
+  resizeImage 
+} from "./functions/images/exports";
+
+import {
+  getExtensions,
+  getMIMEType
+} from "./functions/files/exports";
+
+import {
+  instanceOfArray,
+  instanceOfBuffer,
+  instanceOfNumber,
+  instanceOfString,
+  isUndefined
+} from "./functions/zod/exports";
+
+import {
+  getStat
+} from "./functions/fs/exports";
+
+export default {
+  getExtensions,
+  getMIMEType,
+  getStat,
+  getSupportedImages,
+  isASupportedImage,
+  changeExtension,
+  changeQuality,
+  resizeImage,
+  instanceOfArray,
+  instanceOfBuffer,
+  instanceOfNumber,
+  instanceOfString,
+  isUndefined
+}
