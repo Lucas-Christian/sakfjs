@@ -1,4 +1,4 @@
-A LIB AINDA ESTÁ SENDO FEITA E ISSO SERÁ ATUALIZADO EM BREVE!
+ATTENTION: Jimp's methods are very heavy, so I'm trying to redo them in npm
 
 # sakf
 
