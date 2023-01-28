@@ -4,6 +4,14 @@ import { supportedFormats } from "../../constants/supportedFormats";
 import { instanceOfBuffer } from "../zod/instanceof";
 import { read } from "jimp";
 
+/**
+ * @function changeExtension
+ * @description change the extension of an image(jpg or png) received as a buffer
+ * 
+ * @param {Buffer | string | string[]} buffer
+ * @param {String} ext
+ * @returns {Promise<Buffer>}
+ */
 export async function changeExtension(buffer: string | Buffer | string[], ext: SupportedExt): Promise<Buffer> {
   try {
     if(!instanceOfBuffer(buffer)) {

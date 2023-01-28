@@ -7,7 +7,5 @@
     "lib": ["ES6", "DOM"],
     "module": "CommonJS",
     "target": "ES6"
-  },
-  "include": ["**/*"],
-  "exclude": ["../node_modules", "../vite.config.ts"]
+  }
 }

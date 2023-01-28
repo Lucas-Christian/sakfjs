@@ -24,7 +24,6 @@ type Image = z.TypeOf<typeof ImageSchema>;
  * @param folderPath 
  * @returns {Promise<Image[]>}
 */
-
 export async function getSupportedImages(folderPath: string): Promise<Image[]> {
   try {
     let images: Image[] = [];

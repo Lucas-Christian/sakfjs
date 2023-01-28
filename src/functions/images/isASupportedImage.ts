@@ -1,6 +1,13 @@
 import type { SupportedMIMEType, SupportedExt } from "../../constants/supportedFormats";
 import { supportedFormats } from "../../constants/supportedFormats";
 
+/**
+ * @function isASupportedImage
+ * @description check if a extension or mime has support for other functions of sakfuncs lib
+ * 
+ * @param {String} extOrMIMEType 
+ * @returns {Boolean}
+ */
 export function isASupportedImage(extOrMIMEType: SupportedMIMEType | SupportedExt): boolean {
   try {
     if(checkByExt() || checkByMIME()) {

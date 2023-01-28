@@ -36,7 +36,6 @@
     }
   },
   "types": "./lib/cjs/types/index.d.ts",
-  "type": "module",
   "files": [
     "lib/**/*"
   ]
