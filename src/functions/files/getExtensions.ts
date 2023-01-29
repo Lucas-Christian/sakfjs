@@ -1,20 +1,20 @@
-import { instanceOfString } from "../zod/instanceof";
+import { isString } from "../zod/isType";
 import { extByMIMEType } from "../../constants/extByMIMEType";
 
 /**
  * @function getExtensions
  * @description get all Extensions of a mimeType
  * 
- * @param {String} mimeType 
+ * @param {String} MIMEType 
  * @returns {String} extensions
  */
-export function getExtensions(mimeType: string): typeof extByMIMEType[keyof typeof extByMIMEType] {
-  if(!instanceOfString(mimeType) || mimeType === "") {
-    throw new Error("mimeType is not a string or is an empty string.")
+export function getExtensions(MIMEType: string): typeof extByMIMEType[keyof typeof extByMIMEType] {
+  if(!isString(MIMEType) || MIMEType === "") {
+    throw new Error("MIMETypeEmptyOrIsNotString");
   }
 
-  const extensions = extByMIMEType[mimeType.toLowerCase() as keyof typeof extByMIMEType];
-  if(!extensions) throw new Error("Extension not founded or not exists.");
+  const extensions = extByMIMEType[MIMEType.toLowerCase() as keyof typeof extByMIMEType];
+  if(!extensions) throw new Error("extensionsNotFound");
 
   return extensions;
 };

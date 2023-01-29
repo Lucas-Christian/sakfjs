@@ -39,10 +39,10 @@ Instalação: `npm i --save sakf`
 
 ### Zod
 - [isUndefined](#isundefined)
-- [instanceOfString](#instanceofstring)
-- [instanceOfNumber](#instanceofnumber)
-- [instanceOfArray](#instanceofarray)
-- [instanceOfBuffer](#instanceofbuffer)
+- [isString](#instanceofstring)
+- [isNumber](#instanceofnumber)
+- [isArray](#instanceofarray)
+- [isBuffer](#instanceofbuffer)
 
 #### getExtensions
 ```JS
@@ -55,21 +55,21 @@ Instalação: `npm i --save sakf`
   let mimeType = getMIMEType("arquivo.js");
   console.log(mimeType); // "application/javascript"
 
-  mimeType = getMIMEType("C:\\Users\\User\\Pictures\\image.jpg");
+  mimeType = getMIMEType("C:\Users\User\Pictures\image.jpg");
   console.log(mimeType); // "image/jpeg"
 ```
 
 #### getStat
 ```JS
-  let imageStat = await stat("C:\\Users\\User\\Pictures\\image.jpg");
+  let imageStat = await stat("C:\Users\User\Pictures\image.jpg");
   console.log(imageStat); // fs.Stats -> https://nodejs.org/api/fs.html#class-fsstats
 ```
 
 #### changeExtension
 ```JS
-  const image = await changeExtension("C:\\Users\\User\\Pictures\\image.jpg", "png"); 
+  const image = await changeExtension("C:\Users\User\Pictures\image.jpg", "png"); 
   // Olhe na pasta onde está a sua imagem e você verá que o caminho mudou!
-  // "C:\\Users\\User\\Pictures\\image.jpg" -> "C:\\Users\\User\\Pictures\\imagem.png"
+  // "C:\Users\User\Pictures\image.jpg" -> "C:\Users\User\Pictures\imagem.png"
 
   // changeExtension também retorna o Buffer da imagem já alterada para caso você precise!
   console.log(image); // Buffer
@@ -77,7 +77,7 @@ Instalação: `npm i --save sakf`
 
 #### changeQuality
 ```JS 
-  const image = await changeQuality("C:\\Users\\User\\Pictures\\image.jpg", 60); 
+  const image = await changeQuality("C:\Users\User\Pictures\image.jpg", 60); 
   // Abra a imagem e você irá notar a diferença na qualidade da imagem
 
   // changeQuality também retorna o Buffer da imagem já alterada para caso você precise!
@@ -88,7 +88,7 @@ Instalação: `npm i --save sakf`
 ```JS
   import { readFileSync } from "fs";
 
-  const images = getSupportedImages("C:\\Users\\User\\Pictures");
+  const images = getSupportedImages("C:\Users\User\Pictures");
 
   console.log(images); 
   /* Todas as imagens suportadas serão retornadas no array dessa forma
@@ -96,14 +96,14 @@ Instalação: `npm i --save sakf`
       {          
         name: image.jpg, 
         size: 3000, 
-        path: "C:\\Users\\User\\Pictures\\image.jpg",
+        path: "C:\Users\User\Pictures\image.jpg",
         ext: "jpg",
         mime: "image/jpeg"
       },
       {         
         name: image2.png,
         size: 5000,
-        path: "C:\\Users\\User\\Pictures\\image2.png",
+        path: "C:\Users\User\Pictures\image2.png",
         ext: "png",
         mime: image/png
       }
@@ -129,7 +129,7 @@ Instalação: `npm i --save sakf`
 
 #### resizeImage
 ```JS
-  const image = await resizeImage("C:\\Users\\User\\Pictures\\image.jpg", 600, 400); // 1200x800 -> 600x400
+  const image = await resizeImage("C:\Users\User\Pictures\image.jpg", 600, 400); // 1200x800 -> 600x400
   // Abra a imagem e você irá notar a diferença no tamanho da imagem 
   
   // resizeImage também retorna o Buffer da imagem já alterada para caso você precise!
@@ -142,32 +142,32 @@ Instalação: `npm i --save sakf`
   console.log(isUndefined("hello")); // false
 ```
 
-#### instanceOfString
+#### isString
 ```JS
-  console.log(instanceOfString("hello")); // true
-  console.log(instanceOfString(321)); // false
+  console.log(isString("hello")); // true
+  console.log(isString(321)); // false
 ```
 
-#### instanceOfNumber
+#### isNumber
 ```JS
-  console.log(instanceOfNumber(321)); // true
-  console.log(instanceOfNumber("hello")); // false
+  console.log(isNumber(321)); // true
+  console.log(isNumber("hello")); // false
 ```
 
-#### instanceOfArray
+#### isArray
 ```JS
-  console.log(instanceOfArray(["hello", "world"])); // true
-  console.log(instanceOfArray({hello: "world"})); // false
+  console.log(isArray(["hello", "world"])); // true
+  console.log(isArray({hello: "world"})); // false
 ```
 
-#### instanceOfBuffer
+#### isBuffer
 ```JS
   import { readFileSync } from "fs";
 
-  let buffer = readFileSync("C:\\Users\\User\\Pictures\\image.jpg");
+  let buffer = readFileSync("C:\Users\User\Pictures\image.jpg");
 
-  console.log(instanceOfBuffer(buffer); // true
-  console.log(instanceOfBuffer({hello: "world"})); // false
+  console.log(isBuffer(buffer); // true
+  console.log(isBuffer({hello: "world"})); // false
 ```
 
 ## Colaborar

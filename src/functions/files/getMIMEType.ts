@@ -1,4 +1,4 @@
-import { instanceOfString } from "../zod/instanceof";
+import { isString } from "../zod/isType";
 import { mimeTypesByExt } from "../../constants/mimetypesByExt";
 import { parse } from "path";
 
@@ -10,18 +10,18 @@ import { parse } from "path";
  * @returns {String} mimeType
  */
 export function getMIMEType(filenameOrPath: string): typeof mimeTypesByExt[keyof typeof mimeTypesByExt] {
-  if(!instanceOfString(filenameOrPath) || filenameOrPath === "") {
-    throw new Error("Path is not a string or is an empty string.");
+  if(!isString(filenameOrPath) || filenameOrPath === "") {
+    throw new Error("filenameOrPathEmptyOrIsNotString");
   }
 
   const { ext } = parse(filenameOrPath);
 
-  if(!instanceOfString(ext) || ext === "") {
-    throw new Error("Extension is an empty string.");
+  if(!isString(ext) || ext === "") {
+    throw new Error("extensionNotFound");
   }
 
   const mimeType = mimeTypesByExt[ext.toLowerCase() as keyof typeof mimeTypesByExt];
-  if(!mimeType) throw new Error("mimeType not founded or not exists.");
+  if(!mimeType) throw new Error("MIMETypeNotFound");
 
   return mimeType;
 }

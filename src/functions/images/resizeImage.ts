@@ -1,6 +1,6 @@
 import type { SupportedMIMEType } from "../../constants/supportedFormats";
 import type { PathLike } from "fs";
-import { instanceOfBuffer, instanceOfNumber } from "../zod/instanceof";
+import { isBuffer, isNumber } from "../zod/isType";
 import { isASupportedImage } from "./isASupportedImage";
 import { readFileSync } from "fs";
 import { getMIMEType } from "../files/getMIMEType";
@@ -21,8 +21,8 @@ type Options = { width: number, height: number, path: string };
 export async function resizeImage(imagePath: PathLike, width: number, height: number): Promise<Buffer> {
   try {
     const buffer = readFileSync(imagePath);
-    if(!instanceOfBuffer(buffer)) {
-      throw new Error("isn'tBuffer");
+    if(!isBuffer(buffer)) {
+      throw new Error("pathDoesNotLeadToBuffer");
     }
   
     const type = getMIMEType(imagePath as string);
@@ -31,12 +31,8 @@ export async function resizeImage(imagePath: PathLike, width: number, height: nu
       throw new Error("unsupportedImage");
     } 
     
-    if(!instanceOfNumber(width) || !instanceOfNumber(height)) {
-      throw new Error("widthOrHeightIsn'tNumber");
-    } else if(!Number.isFinite(width)) {
-      throw new Error("incorrectWidth");
-    } else if(!Number.isFinite(height)) {
-      throw new Error("incorrectHeight");
+    if(!isNumber(width) || !isNumber(height)) {
+      throw new Error("widthOrHeightIsNotNumber");
     } else if(width < 1 || width > 10000 || height < 1 || height > 10000) {
       throw new Error("widthOrHeightInvalidQuantity");
     }

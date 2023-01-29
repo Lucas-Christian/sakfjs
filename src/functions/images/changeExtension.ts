@@ -2,7 +2,7 @@ import type { SupportedExt } from "../../constants/supportedFormats";
 import type { PathLike } from "fs";
 import { isASupportedImage } from "./isASupportedImage";
 import { supportedFormats } from "../../constants/supportedFormats";
-import { instanceOfBuffer } from "../zod/instanceof";
+import { isBuffer } from "../zod/isType";
 import { readFileSync } from "fs";
 import { read } from "jimp";
 
@@ -19,8 +19,8 @@ export async function changeExtension(imagePath: PathLike, ext: SupportedExt): P
   try {
     const buffer = readFileSync(imagePath);
 
-    if(!instanceOfBuffer(buffer)) {
-      throw new Error("isn'tBuffer");
+    if(!isBuffer(buffer)) {
+      throw new Error("pathDoesNotLeadToBuffer");
     } else if(!ext || !isASupportedImage(ext)) {
       throw new Error("unsupportedImage");
     }

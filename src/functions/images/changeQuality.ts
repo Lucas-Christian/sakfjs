@@ -1,5 +1,5 @@
 import type { PathLike } from "fs";
-import { instanceOfBuffer, instanceOfNumber } from "../zod/instanceof";
+import { isBuffer, isNumber } from "../zod/isType";
 import { readFileSync } from "fs";
 import { read, AUTO } from "jimp";
 
@@ -15,10 +15,10 @@ export async function changeQuality(imagePath: PathLike, quality: number): Promi
   const buffer = readFileSync(imagePath);
 
   try {
-    if(!instanceOfBuffer(buffer)) {
-      throw new Error("isn'tBuffer");
-    } else if(!instanceOfNumber(quality)) {
-      throw new Error("isn'tNumber");
+    if(!isBuffer(buffer)) {
+      throw new Error("pathDoesNotLeadToBuffer");
+    } else if(!isNumber(quality)) {
+      throw new Error("isNotNumber");
     } else if(quality < 1 || quality > 100) {
       throw new Error("invalidQualityValue");
     }
