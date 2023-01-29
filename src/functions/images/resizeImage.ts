@@ -1,8 +1,11 @@
 import type { SupportedMIMEType } from "../../constants/supportedFormats";
+import type { PathLike } from "fs";
 import { instanceOfBuffer, instanceOfNumber } from "../zod/instanceof";
 import { isASupportedImage } from "./isASupportedImage";
+import { readFileSync } from "fs";
 import { getMIMEType } from "../files/getMIMEType";
 import { read, AUTO } from "jimp";
+
 
 type Options = { width: number, height: number, path: string };
 
@@ -10,17 +13,19 @@ type Options = { width: number, height: number, path: string };
  * @function resizeImage
  * @description change the size of an image(width and height) received as a buffer
  * 
- * @param {Buffer | string | string[]} buffer
- * @param {String path, Number width, Number height}
+ * @param {PathLike} imagePath
+ * @param {Number} width 
+ * @param {Number} height
  * @returns {Promise<Buffer>}
  */
-export async function resizeImage(buffer: string | Buffer | string[], { path, width, height }: Options): Promise<Buffer> {
+export async function resizeImage(imagePath: PathLike, width: number, height: number): Promise<Buffer> {
   try {
+    const buffer = readFileSync(imagePath);
     if(!instanceOfBuffer(buffer)) {
       throw new Error("isn'tBuffer");
     }
   
-    const type = getMIMEType(path);
+    const type = getMIMEType(imagePath as string);
     
     if(!type || !isASupportedImage(type as SupportedMIMEType)) {
       throw new Error("unsupportedImage");

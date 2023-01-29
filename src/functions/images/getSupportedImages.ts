@@ -42,18 +42,18 @@ export async function getSupportedImages(folderPath: string): Promise<Image[]> {
       fileStat = await getStat(pathToFile) as Stats;
   
       if(!fileStat.isFile()) continue;
-      let { ext } = parse(pathToFile),
+      let { ext, name } = parse(pathToFile),
       MIMEType = getMIMEType(pathToFile);
   
       if(!isASupportedImage(ext as SupportedExt)) continue;
       images.push(
-        { 
-          name: folder[file], 
+        ImageSchema.parse({ 
+          name: name, 
           size: fileStat.size, 
           path: pathToFile,
           ext: ext as SupportedExt,
           mime: MIMEType as SupportedMIMEType
-        }
+        })
       );
     }
     if(images.length === 0) {

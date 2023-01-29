@@ -55,72 +55,119 @@ Instalação: `npm i --save sakf`
   let mimeType = getMIMEType("arquivo.js");
   console.log(mimeType); // "application/javascript"
 
-  mimeType = getMIMEType("C:\\Users\\User\\Pictures\\imagem.jpg");
+  mimeType = getMIMEType("C:\\Users\\User\\Pictures\\image.jpg");
   console.log(mimeType); // "image/jpeg"
 ```
 
 #### getStat
 ```JS
-  let imageStat = await stat("C:\\Users\\User\\Pictures\\imagem.jpg");
+  let imageStat = await stat("C:\\Users\\User\\Pictures\\image.jpg");
   console.log(imageStat); // fs.Stats -> https://nodejs.org/api/fs.html#class-fsstats
 ```
 
 #### changeExtension
 ```JS
-  import { readFileSync } from "fs";
+  const image = await changeExtension("C:\\Users\\User\\Pictures\\image.jpg", "png"); 
+  // Olhe na pasta onde está a sua imagem e você verá que o caminho mudou!
+  // "C:\\Users\\User\\Pictures\\image.jpg" -> "C:\\Users\\User\\Pictures\\imagem.png"
 
-  const buffer = readFileSync("C:\\Users\\User\\Pictures\\imagem.jpg");
-  
-  const image = await changeExtension(buffer, "png"); 
-  // Olhe na pasta onde está a sua imagem e você verá que o caminho mudou! C:\\Users\\User\\Pictures\\imagem.png
   // changeExtension também retorna o Buffer da imagem já alterada para caso você precise!
-
-  console.log(image) // Buffer
+  console.log(image); // Buffer
 ```
 
 #### changeQuality
-```JS
+```JS 
+  const image = await changeQuality("C:\\Users\\User\\Pictures\\image.jpg", 60); 
+  // Abra a imagem e você irá notar a diferença na qualidade da imagem
 
+  // changeQuality também retorna o Buffer da imagem já alterada para caso você precise!
+  console.log(image); // Buffer
 ```
 
 #### getSupportedImages
 ```JS
+  import { readFileSync } from "fs";
 
+  const images = getSupportedImages("C:\\Users\\User\\Pictures");
+
+  console.log(images); 
+  /* Todas as imagens suportadas serão retornadas no array dessa forma
+    [
+      {          
+        name: image.jpg, 
+        size: 3000, 
+        path: "C:\\Users\\User\\Pictures\\image.jpg",
+        ext: "jpg",
+        mime: "image/jpeg"
+      },
+      {         
+        name: image2.png,
+        size: 5000,
+        path: "C:\\Users\\User\\Pictures\\image2.png",
+        ext: "png",
+        mime: image/png
+      }
+    ]
+  */
 ```
 
 #### isASupportedImage
 ```JS
+  let supportedImageByExt = isASupportedImage("jpg"),
+  supportedImageByMIME = isASupportedImage("image/jpeg");
+
+  let unsupportedImageByExt = isASupportedImage("gif"),
+  unsupportedImageByMIME = isASupportedImage("image/gif");
+
+  console.log(supportedImageByExt); // true
+  console.log(supportedImageByMIME); // true
+
+  console.log(unsupportedImageByExt); // false
+  console.log(unsupportedImageByMIME); // false
 
 ```
 
 #### resizeImage
 ```JS
-
+  const image = await resizeImage("C:\\Users\\User\\Pictures\\image.jpg", 600, 400); // 1200x800 -> 600x400
+  // Abra a imagem e você irá notar a diferença no tamanho da imagem 
+  
+  // resizeImage também retorna o Buffer da imagem já alterada para caso você precise!
+  console.log(image); // Buffer
 ```
 
 #### isUndefined
 ```JS
-
+  console.log(isUndefined(undefined); // true
+  console.log(isUndefined("hello")); // false
 ```
 
 #### instanceOfString
 ```JS
-
+  console.log(instanceOfString("hello")); // true
+  console.log(instanceOfString(321)); // false
 ```
 
 #### instanceOfNumber
 ```JS
-
+  console.log(instanceOfNumber(321)); // true
+  console.log(instanceOfNumber("hello")); // false
 ```
 
 #### instanceOfArray
 ```JS
-
+  console.log(instanceOfArray(["hello", "world"])); // true
+  console.log(instanceOfArray({hello: "world"})); // false
 ```
 
 #### instanceOfBuffer
 ```JS
+  import { readFileSync } from "fs";
 
+  let buffer = readFileSync("C:\\Users\\User\\Pictures\\image.jpg");
+
+  console.log(instanceOfBuffer(buffer); // true
+  console.log(instanceOfBuffer({hello: "world"})); // false
 ```
 
 ## Colaborar
