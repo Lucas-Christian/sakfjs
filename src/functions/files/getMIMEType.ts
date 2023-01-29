@@ -14,14 +14,23 @@ export function getMIMEType(filenameOrPath: string): typeof mimeTypesByExt[keyof
     throw new Error("filenameOrPathEmptyOrIsNotString");
   }
 
-  const { ext } = parse(filenameOrPath);
+  if(getMIME(filenameOrPath)) {
+    return getMIME(filenameOrPath);
+  } else if(getMIME(`.${filenameOrPath}`)) {
+    return getMIME(`.${filenameOrPath}`);
+  }
 
+  const { ext } = parse(filenameOrPath);
   if(!isString(ext) || ext === "") {
     throw new Error("extensionNotFound");
   }
 
-  const mimeType = mimeTypesByExt[ext.toLowerCase() as keyof typeof mimeTypesByExt];
+  const mimeType = getMIME(ext);
   if(!mimeType) throw new Error("MIMETypeNotFound");
 
   return mimeType;
+
+  function getMIME(MIMEToSearch: string) {
+    return mimeTypesByExt[MIMEToSearch.toLowerCase() as keyof typeof mimeTypesByExt];
+  }
 }

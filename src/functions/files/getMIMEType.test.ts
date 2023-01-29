@@ -21,7 +21,7 @@ describe("#getMIMEType", () => {
     extensions = getMIMEType(".jpg");
     expect(extensions).toStrictEqual("image/jpeg");
 
-    // extensions = getMIMEType("jpg");
-    // expect(extensions).toStrictEqual("image/jpeg");
+    extensions = getMIMEType("jpg");
+    expect(extensions).toStrictEqual("image/jpeg");
   });
 });
