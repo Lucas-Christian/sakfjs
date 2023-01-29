@@ -1,6 +1,5 @@
 {
   "compilerOptions": {
-    "types": ["vitest/importMeta", "vitest/globals"],
     "forceConsistentCasingInFileNames": true,
     "allowSyntheticDefaultImports": true,
     "importsNotUsedAsValues": "error",
