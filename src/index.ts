@@ -1,17 +1,17 @@
-import { 
+export { 
   getSupportedImages,
   isASupportedImage,
   changeExtension,
   changeQuality,
-  resizeImage 
+  resizeImage
 } from "./functions/images/exports";
 
-import {
+export {
   getExtensions,
   getMIMEType
 } from "./functions/files/exports";
 
-import {
+export {
   isArray,
   isBuffer,
   isNumber,
@@ -20,23 +20,6 @@ import {
   isUndefined
 } from "./functions/zod/exports";
 
-import {
+export {
   getStat
 } from "./functions/fs/exports";
-
-export default {
-  getExtensions,
-  getMIMEType,
-  getStat,
-  getSupportedImages,
-  isASupportedImage,
-  changeExtension,
-  changeQuality,
-  resizeImage,
-  isArray,
-  isBuffer,
-  isNumber,
-  isObject,
-  isString,
-  isUndefined
-}
