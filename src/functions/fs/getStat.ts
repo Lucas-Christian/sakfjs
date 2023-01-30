@@ -9,7 +9,7 @@ import { stat } from "fs";
  * @returns {Promise<unknown>}
  */
 
-export function getStat(path: PathLike): Promise<unknown> {
+export function getStat(path: PathLike): Promise<Stats> {
   return new Promise((resolve, reject) => {
     stat(path, (err: NodeJS.ErrnoException | null, stat: Stats) => {
       if(err) return reject(err);
