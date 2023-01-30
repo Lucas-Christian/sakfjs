@@ -13,7 +13,7 @@
     "clean": "rimraf ./lib",
     "test": "vitest",
     "coverage": "vitest --coverage",
-    "unitary": "vitest src/functions/fs/getStat.test.ts"
+    "unitary": "vitest src/functions/images/isASupportedImage.test.ts"
   },
   "license": "ISC",
   "devDependencies": {

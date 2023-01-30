@@ -25,43 +25,41 @@ type Image = z.TypeOf<typeof ImageSchema>;
  * @returns {Promise<Image[]>}
 */
 export async function getSupportedImages(folderPath: string): Promise<Image[]> {
-  try {
-    let images: Image[] = [];
-    
-    if(isUndefined(folderPath as any)) {
-      throw new Error("undefinedFolderPath");
-    }
+  let images: Image[] = [];
   
-    const folder = readdirSync(folderPath);
-    if(folder.length === 0) {
-      throw new Error("emptyFolder");
-    }
-  
-    for(let file in folder) {
-      let pathToFile = join(folderPath, folder[file]),
-      fileStat = await getStat(pathToFile) as Stats;
-  
-      if(!fileStat.isFile()) continue;
-      let { ext, name } = parse(pathToFile),
-      MIMEType = getMIMEType(pathToFile);
-  
-      if(!isASupportedImage(ext as SupportedExt)) continue;
-      images.push(
-        ImageSchema.parse({ 
-          name: name, 
-          size: fileStat.size, 
-          path: pathToFile,
-          ext: ext as SupportedExt,
-          mime: MIMEType as SupportedMIMEType
-        })
-      );
-    }
-    if(images.length === 0) {
-      throw new Error("dontHasSupportedImages");
-    }
-    images.sort((prev, next) => prev.name!.length - next.name!.length);
-    return images;
-  } catch(error) {
-    throw new Error("unexpectedError");
+  if(isUndefined(folderPath as any)) {
+    throw new Error("undefinedFolderPath");
   }
+  
+  const folder = readdirSync(folderPath);
+  if(folder.length === 0) {
+    throw new Error("emptyFolder");
+  }
+  
+  for(let file in folder) {
+    let pathToFile = join(folderPath, folder[file]),
+    fileStat = await getStat(pathToFile) as Stats;
+
+    if(!fileStat.isFile()) continue;
+    let { ext, name } = parse(pathToFile),
+    MIMEType = getMIMEType(pathToFile);
+
+    if(!isASupportedImage(ext as SupportedExt)) continue;
+    images.push(
+      ImageSchema.parse({ 
+        name: name, 
+        size: fileStat.size, 
+        path: pathToFile,
+        ext: ext as SupportedExt,
+        mime: MIMEType as SupportedMIMEType
+      })
+    );
+  }
+  
+  if(images.length === 0) {
+    throw new Error("dontHasSupportedImages");
+  }
+
+  images.sort((prev, next) => prev.name!.length - next.name!.length);
+  return images;
 }

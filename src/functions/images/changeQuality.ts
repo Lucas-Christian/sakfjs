@@ -14,15 +14,15 @@ import { read, AUTO } from "jimp";
 export async function changeQuality(imagePath: PathLike, quality: number): Promise<Buffer> {
   const buffer = readFileSync(imagePath);
 
+  if(!isBuffer(buffer)) {
+    throw new Error("pathDoesNotLeadToBuffer");
+  } else if(!isNumber(quality)) {
+    throw new Error("isNotNumber");
+  } else if(quality < 1 || quality > 100) {
+    throw new Error("invalidQualityValue");
+  }
+  
   try {
-    if(!isBuffer(buffer)) {
-      throw new Error("pathDoesNotLeadToBuffer");
-    } else if(!isNumber(quality)) {
-      throw new Error("isNotNumber");
-    } else if(quality < 1 || quality > 100) {
-      throw new Error("invalidQualityValue");
-    }
-    
     const image = await read(buffer);
     return await image.quality(quality).getBufferAsync(AUTO as unknown as string);
   } catch(error) {

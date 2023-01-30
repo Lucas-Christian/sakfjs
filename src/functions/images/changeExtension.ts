@@ -16,18 +16,18 @@ import { read } from "jimp";
  */
 
 export async function changeExtension(imagePath: PathLike, ext: SupportedExt): Promise<Buffer> {
+  const buffer = readFileSync(imagePath);
+
+  if(!isBuffer(buffer)) {
+    throw new Error("pathDoesNotLeadToBuffer");
+  } else if(!ext || !isASupportedImage(ext)) {
+    throw new Error("unsupportedImage");
+  }
+
   try {
-    const buffer = readFileSync(imagePath);
-
-    if(!isBuffer(buffer)) {
-      throw new Error("pathDoesNotLeadToBuffer");
-    } else if(!ext || !isASupportedImage(ext)) {
-      throw new Error("unsupportedImage");
-    }
-
     const image = await read(buffer as Buffer),  
     mime = supportedFormats[ext as SupportedExt] || "image/jpeg";
-
+    
     return await image.getBufferAsync(mime);
   } catch(error) {
     throw new Error("unexpectedError");

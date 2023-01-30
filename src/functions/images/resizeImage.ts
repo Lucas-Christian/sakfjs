@@ -19,24 +19,24 @@ type Options = { width: number, height: number, path: string };
  * @returns {Promise<Buffer>}
  */
 export async function resizeImage(imagePath: PathLike, width: number, height: number): Promise<Buffer> {
-  try {
-    const buffer = readFileSync(imagePath);
-    if(!isBuffer(buffer)) {
-      throw new Error("pathDoesNotLeadToBuffer");
-    }
+  const buffer = readFileSync(imagePath);
+  if(!isBuffer(buffer)) {
+    throw new Error("pathDoesNotLeadToBuffer");
+  }
   
-    const type = getMIMEType(imagePath as string);
-    
-    if(!type || !isASupportedImage(type as SupportedMIMEType)) {
-      throw new Error("unsupportedImage");
-    } 
-    
-    if(!isNumber(width) || !isNumber(height)) {
-      throw new Error("widthOrHeightIsNotNumber");
-    } else if(width < 1 || width > 10000 || height < 1 || height > 10000) {
-      throw new Error("widthOrHeightInvalidQuantity");
-    }
-
+  const type = getMIMEType(imagePath as string);
+  
+  if(!type || !isASupportedImage(type as SupportedMIMEType)) {
+    throw new Error("unsupportedImage");
+  } 
+  
+  if(!isNumber(width) || !isNumber(height)) {
+    throw new Error("widthOrHeightIsNotNumber");
+  } else if(width < 1 || width > 10000 || height < 1 || height > 10000) {
+    throw new Error("widthOrHeightInvalidQuantity");
+  }
+  
+  try {
     const image = await read(buffer as Buffer);
     return await image.resize(width, height).getBufferAsync(AUTO as unknown as string);
   } catch(error) {
