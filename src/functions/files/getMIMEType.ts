@@ -25,11 +25,8 @@ export function getMIMEType(filenameOrPath: string): typeof mimeTypesByExt[keyof
     throw new Error("extensionNotFound");
   }
 
-  const mimeType = getMIME(ext);
-  if(!mimeType) throw new Error("MIMETypeNotFound");
-
-  return mimeType;
-
+  return getMIME(ext);
+  
   function getMIME(MIMEToSearch: string) {
     return mimeTypesByExt[MIMEToSearch.toLowerCase() as keyof typeof mimeTypesByExt];
   }

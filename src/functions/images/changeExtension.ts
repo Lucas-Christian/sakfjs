@@ -1,9 +1,10 @@
-import type { SupportedExt } from "../../constants/supportedFormats";
+import type { SupportedExt, SupportedMIMEType } from "../../constants/supportedFormats";
 import type { PathLike } from "fs";
 import { isASupportedImage } from "./isASupportedImage";
-import { supportedFormats } from "../../constants/supportedFormats";
-import { isBuffer } from "../zod/isType";
+import { getExtensions } from "../files/getExtensions";
 import { readFileSync } from "fs";
+import { getMIMEType } from "../files/getMIMEType";
+import { isBuffer } from "../zod/isType";
 import { read } from "jimp";
 
 /**
@@ -15,21 +16,25 @@ import { read } from "jimp";
  * @returns {Promise<Buffer>}
  */
 
-export async function changeExtension(imagePath: PathLike, ext: SupportedExt): Promise<Buffer> {
-  const buffer = readFileSync(imagePath);
+export async function changeExtension(imagePath: PathLike, extOrMIMEType: SupportedExt | SupportedMIMEType): Promise<Buffer> {
+  let buffer = readFileSync(imagePath);
 
-  if(!isBuffer(buffer)) {
+  if(!isBuffer(buffer) || buffer.length === 0) {
     throw new Error("pathDoesNotLeadToBuffer");
-  } else if(!ext || !isASupportedImage(ext)) {
+  } else if(!extOrMIMEType || !isASupportedImage(extOrMIMEType)) {
     throw new Error("unsupportedImage");
   }
 
   try {
-    const image = await read(buffer as Buffer),  
-    mime = supportedFormats[ext as SupportedExt] || "image/jpeg";
+    const image = await read(buffer as Buffer);
+    if(getExtensions(extOrMIMEType)) {
+      return await image.getBufferAsync(extOrMIMEType);
+    }
+
+    const mime = getMIMEType(extOrMIMEType) || "image/jpeg";
     
     return await image.getBufferAsync(mime);
   } catch(error) {
-    throw new Error("unexpectedError");
+    throw error;
   }
 }

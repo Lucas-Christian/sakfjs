@@ -4,7 +4,7 @@ import { isASupportedImage } from "./isASupportedImage";
 import { join, parse } from "path";
 import { readdirSync } from "fs";
 import { getMIMEType } from "../files/getMIMEType";
-import { isUndefined } from "../zod/isType";
+import { isString, isUndefined } from "../zod/isType";
 import { getStat } from "../fs/getStat";
 import { z } from "zod";
 
@@ -29,6 +29,8 @@ export async function getSupportedImages(folderPath: string): Promise<Image[]> {
   
   if(isUndefined(folderPath as any)) {
     throw new Error("undefinedFolderPath");
+  } else if(!isString(folderPath) || folderPath === "") {
+    throw new Error("folderPathEmptyOrIsNotString");
   }
   
   const folder = readdirSync(folderPath);

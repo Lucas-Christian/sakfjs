@@ -1,6 +1,9 @@
 import type { PathLike } from "fs";
 import { isBuffer, isNumber } from "../zod/isType";
+import { SupportedMIMEType } from "../../constants/supportedFormats";
+import { isASupportedImage } from "./isASupportedImage";
 import { readFileSync } from "fs";
+import { getMIMEType } from "../files/getMIMEType";
 import { read, AUTO } from "jimp";
 
 /**
@@ -13,10 +16,16 @@ import { read, AUTO } from "jimp";
  */
 export async function changeQuality(imagePath: PathLike, quality: number): Promise<Buffer> {
   const buffer = readFileSync(imagePath);
-
-  if(!isBuffer(buffer)) {
+  if(!isBuffer(buffer) || buffer.length === 0) {
     throw new Error("pathDoesNotLeadToBuffer");
-  } else if(!isNumber(quality)) {
+  }
+
+  const type = getMIMEType(imagePath as string);
+  if(!type || !isASupportedImage(type as SupportedMIMEType)) {
+    throw new Error("unsupportedImage");
+  }
+
+  if(!isNumber(quality)) {
     throw new Error("isNotNumber");
   } else if(quality < 1 || quality > 100) {
     throw new Error("invalidQualityValue");
@@ -26,6 +35,6 @@ export async function changeQuality(imagePath: PathLike, quality: number): Promi
     const image = await read(buffer);
     return await image.quality(quality).getBufferAsync(AUTO as unknown as string);
   } catch(error) {
-    throw new Error("unexpectedError");
+    throw error;
   }
 }

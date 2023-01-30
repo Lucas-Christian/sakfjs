@@ -11,17 +11,18 @@ describe("#getMIMEType", () => {
   test("Espera que um erro ocorra por tipo inexistente", () => {
     expect(() => getMIMEType("arquivo")).toThrowError("extensionNotFound");
   });
-  test("Espera que um erro ocorra por tipo inexistente", () => {
-    expect(() => getMIMEType("arquivo.dadawdd")).toThrowError("MIMETypeNotFound");
+  test("Espera que o tipo seja undefined", () => {
+    let mime = getMIMEType("arquivo.dadawdd");
+    expect(mime).toBe(undefined);
   });
   test("Espera retornar as possíveis extensões do MIME type image/jpeg", () => {
-    let extensions = getMIMEType("image.jpg");
-    expect(extensions).toStrictEqual("image/jpeg");
+    let mime = getMIMEType("image.jpg");
+    expect(mime).toStrictEqual("image/jpeg");
     
-    extensions = getMIMEType(".jpg");
-    expect(extensions).toStrictEqual("image/jpeg");
+    mime = getMIMEType(".jpg");
+    expect(mime).toStrictEqual("image/jpeg");
 
-    extensions = getMIMEType("jpg");
-    expect(extensions).toStrictEqual("image/jpeg");
+    mime = getMIMEType("jpg");
+    expect(mime).toStrictEqual("image/jpeg");
   });
 });

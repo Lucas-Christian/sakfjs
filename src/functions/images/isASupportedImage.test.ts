@@ -2,9 +2,8 @@ import { describe, test, expect } from "vitest";
 import { isASupportedImage } from "./isASupportedImage";
 
 describe("#isASupportedImage", () => {
-  test("É esperado que seja falso", () => {
-    let checkedExtOrMIMEType = isASupportedImage("");
-    expect(checkedExtOrMIMEType).toBe(false);
+  test("Os erros de não ser string, e string vazia devem ser jogados", () => {
+    expect(() => isASupportedImage("")).toThrowError("filenameOrPathEmptyOrIsNotString");
 
     expect(() => isASupportedImage(123 as any)).toThrowError("isNotString");
   });

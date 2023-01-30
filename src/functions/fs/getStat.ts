@@ -6,7 +6,7 @@ import { stat } from "fs";
  * @description stat of fs as a promise
  * 
  * @param {PathLike} path
- * @returns {Promise<unknown>}
+ * @returns {Promise<Stats>}
  */
 
 export function getStat(path: PathLike): Promise<Stats> {

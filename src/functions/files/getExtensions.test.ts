@@ -8,11 +8,12 @@ describe("#getExtensions", () => {
   test("Espera que um erro ocorra por tipo incorreto", () => {
     expect(() => getExtensions(123 as any)).toThrowError("MIMETypeEmptyOrIsNotString");
   });
-  test("Espera que um erro ocorra por tipo inexistente", () => {
-    expect(() => getExtensions("adawdad/dad")).toThrowError("extensionsNotFound");
+  test("Espera que o tipo seja undefined", () => {
+    let extensions = getExtensions("adawdad/dad");
+    expect(extensions).toBe(undefined);
   });
   test("Espera retornar as possíveis extensões do MIME type image/jpeg", () => {
-    const extensions = getExtensions("image/jpeg");
+    let extensions = getExtensions("image/jpeg");
     expect(extensions).toStrictEqual([".jpeg", ".jpg", ".jpe"]);
   });
 });

@@ -13,8 +13,5 @@ export function getExtensions(MIMEType: string): typeof extByMIMEType[keyof type
     throw new Error("MIMETypeEmptyOrIsNotString");
   }
 
-  const extensions = extByMIMEType[MIMEType.toLowerCase() as keyof typeof extByMIMEType];
-  if(!extensions) throw new Error("extensionsNotFound");
-
-  return extensions;
+  return extByMIMEType[MIMEType.toLowerCase() as keyof typeof extByMIMEType];
 };
