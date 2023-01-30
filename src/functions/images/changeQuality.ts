@@ -1,6 +1,6 @@
+import type { SupportedMIMEType } from "../../constants/supportedFormats";
 import type { PathLike } from "fs";
 import { isBuffer, isNumber } from "../zod/isType";
-import { SupportedMIMEType } from "../../constants/supportedFormats";
 import { isASupportedImage } from "./isASupportedImage";
 import { readFileSync } from "fs";
 import { getMIMEType } from "../files/getMIMEType";

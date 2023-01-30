@@ -1,8 +1,8 @@
 ATENÇÃO: Os metódos do Jimp estão muito pesados, então estou tentando refazer eles na npm
 
-# sakf
+# sakjs
 
-O sakf é uma lib feita por Lucas Christian, essa lib foi feita para
+O sakjs é uma lib feita por Lucas Christian, essa lib foi feita para
 ser como um canivete suíço, diversas funções úteis, e eficientes.
 
 ## Sumário
@@ -10,12 +10,12 @@ ser como um canivete suíço, diversas funções úteis, e eficientes.
 - [Tipos de Imagem Suportadas](#tipos-de-imagem-suportadas);
 - [Funções](#funções);
 - [Colaborar](#colaborar);
-- [Erros no sakf](#erros-no-sakf);
+- [Erros no sakjs](#erros-no-sakjs);
 - [Autores](#autores).
 
 
 ## Instalação
-Instalação: `npm i --save sakf`
+Instalação: `npm i --save sakjs`
 
 ## Tipos de Imagem Suportadas
 - jpeg;
@@ -46,7 +46,7 @@ Instalação: `npm i --save sakf`
 
 #### getExtensions
 ```JS
-  import { getExtensions } from "sakf";
+  import { getExtensions } from "sakjs";
 
   let extensions = getExtensions("image/jpeg");
   console.log(extensions); // [".jpeg", ".jpg", ".jpe"]
@@ -54,7 +54,7 @@ Instalação: `npm i --save sakf`
 
 #### getMIMEType
 ```JS
-  import { getMIMEType } from "sakf";
+  import { getMIMEType } from "sakjs";
 
   let mimeType = getMIMEType("arquivo.js");
   console.log(mimeType); // "application/javascript"
@@ -65,7 +65,7 @@ Instalação: `npm i --save sakf`
 
 #### getStat
 ```JS
-  import { stat } from "sakf";
+  import { stat } from "sakjs";
 
   let imageStat = await stat("C:/Users/User/Pictures/image.jpg");
   console.log(imageStat); // fs.Stats -> https://nodejs.org/api/fs.html#class-fsstats
@@ -73,7 +73,7 @@ Instalação: `npm i --save sakf`
 
 #### changeExtension
 ```JS
-  import { changeExtension } from "sakf";
+  import { changeExtension } from "sakjs";
   import { writeFile } from "fs";
 
   const image = await changeExtension("C:/Users/User/Pictures/image.jpg", "png"); 
@@ -88,7 +88,7 @@ Instalação: `npm i --save sakf`
 
 #### changeQuality
 ```JS 
-  import { changeQuality } from "sakf";
+  import { changeQuality } from "sakjs";
   import { writeFile } from "fs";
 
   const image = await changeQuality("C:/Users/User/Pictures/image.jpg", 60); 
@@ -102,7 +102,7 @@ Instalação: `npm i --save sakf`
 
 #### getSupportedImages
 ```JS
-  import { getSupportedImages } from "sakf";
+  import { getSupportedImages } from "sakjs";
   import { readFileSync } from "fs";
 
   const images = getSupportedImages("C:/Users/User/Pictures");
@@ -130,7 +130,7 @@ Instalação: `npm i --save sakf`
 
 #### isASupportedImage
 ```JS
-  import { isASupportedImage } from "sakf";
+  import { isASupportedImage } from "sakjs";
 
   let supportedImageByExt = isASupportedImage("jpg"),
   supportedImageByMIME = isASupportedImage("image/jpeg");
@@ -148,7 +148,7 @@ Instalação: `npm i --save sakf`
 
 #### resizeImage
 ```JS
-  import { resizeImage } from "sakf";
+  import { resizeImage } from "sakjs";
   import { writeFile } from "fs";
 
   const image = await resizeImage("C:/Users/User/Pictures/image.jpg", {width: 600, height: 400}); // 1200x800 -> 600x400
@@ -162,7 +162,7 @@ Instalação: `npm i --save sakf`
 
 #### isUndefined
 ```JS
-  import { isUndefined } from "sakf";
+  import { isUndefined } from "sakjs";
 
   console.log(isUndefined(undefined); // true
   console.log(isUndefined("hello")); // false
@@ -170,7 +170,7 @@ Instalação: `npm i --save sakf`
 
 #### isString
 ```JS
-  import { isString } from "sakf";
+  import { isString } from "sakjs";
 
   console.log(isString("hello")); // true
   console.log(isString(321)); // false
@@ -178,7 +178,7 @@ Instalação: `npm i --save sakf`
 
 #### isNumber
 ```JS
-  import { isNumber } from "sakf";
+  import { isNumber } from "sakjs";
 
   console.log(isNumber(321)); // true
   console.log(isNumber("hello")); // false
@@ -186,7 +186,7 @@ Instalação: `npm i --save sakf`
 
 #### isArray
 ```JS
-  import { isArray } from "sakf";
+  import { isArray } from "sakjs";
 
   console.log(isArray(["hello", "world"])); // true
   console.log(isArray({hello: "world"})); // false
@@ -195,7 +195,7 @@ Instalação: `npm i --save sakf`
 #### isBuffer
 ```JS
   import { readFileSync } from "fs";
-  import { isBuffer } from "sakf";
+  import { isBuffer } from "sakjs";
 
   let buffer = readFileSync("C:/Users/User/Pictures/image.jpg");
 
@@ -206,7 +206,7 @@ Instalação: `npm i --save sakf`
 
 #### isObject
 ```JS
-  import { isObject } from "sakf";
+  import { isObject } from "sakjs";
 
   console.log(isObject({hello: "world"}); // true
   console.log(isObject("hello")); // false
@@ -217,7 +217,7 @@ Instalação: `npm i --save sakf`
 Sempre que pensar em funções que podem ser úteis, e que seriam úteis em uma lib,
 faça ela e a mande com um pull request, com testes já implementados na nova função.
 
-## Erros no sakf?
+## Erros no sakjs?
 
 Caso tenha identificado algum erro, basta abrir uma issues, e caso já tenha
 resolvido esse erro, por favor faça um pull request, assim você colabora com 

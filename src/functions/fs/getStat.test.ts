@@ -7,7 +7,7 @@ describe("#getStat", () => {
   test("É esperado que o getStat rejeite a promessa", async () => {
     try {
       await getStat(123 as any) as unknown as NodeJS.ErrnoException;
-    } catch(error) {
+    } catch(error: any) {
       expect(error.code !== undefined && error.code !== null).toBe(true);
     }
   });

@@ -1,5 +1,5 @@
 {
-  "name": "sakf",
+  "name": "sakjs",
   "version": "1.0.0",
   "description": "useful functions like a swiss army knife",
   "main": "lib/cjs/index.js",

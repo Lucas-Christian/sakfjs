@@ -8,31 +8,31 @@ describe("#changeQuality", () => {
   test("Verifica se todos os erros ocorrem como esperado", async () => {
     try {
       await changeQuality(`${imagePath}2.png`, "" as any);
-    } catch(error) {
+    } catch(error: any) {
       expect(error.message).toBe("isNotNumber");
     }
 
     try {
       await changeQuality(`${imagePath}2.png`, undefined as any);
-    } catch(error) {
+    } catch(error: any) {
       expect(error.message).toBe("isNotNumber");
     }
 
     try {
       await changeQuality(`${imagePath}2.png`, null as any);
-    } catch(error) {
+    } catch(error: any) {
       expect(error.message).toBe("isNotNumber");
     }
 
     try {
       await changeQuality("C:/Users/User/Pictures/testImagesUnsupported/test.js", 100);
-    } catch(error) {
+    } catch(error: any) {
       expect(error.message).toBe("pathDoesNotLeadToBuffer");
     }
 
     try {
       await changeQuality("C:/Users/User/Pictures/testImagesUnsupported", 100);
-    } catch(error) {
+    } catch(error: any) {
       expect(error).toBeInstanceOf(Error);
     }
 

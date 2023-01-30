@@ -12,10 +12,11 @@ import {
 } from "./functions/files/exports";
 
 import {
-  instanceOfArray,
-  instanceOfBuffer,
-  instanceOfNumber,
-  instanceOfString,
+  isArray,
+  isBuffer,
+  isNumber,
+  isObject,
+  isString,
   isUndefined
 } from "./functions/zod/exports";
 
@@ -32,9 +33,10 @@ export default {
   changeExtension,
   changeQuality,
   resizeImage,
-  instanceOfArray,
-  instanceOfBuffer,
-  instanceOfNumber,
-  instanceOfString,
+  isArray,
+  isBuffer,
+  isNumber,
+  isObject,
+  isString,
   isUndefined
 }

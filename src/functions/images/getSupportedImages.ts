@@ -19,7 +19,7 @@ type Image = z.TypeOf<typeof ImageSchema>;
 
 /**
  * @function getSupportedImages
- * @description get the images that other functions of sakfuncs lib support
+ * @description get the images that other functions of sakjs funcs lib support
  * 
  * @param folderPath 
  * @returns {Promise<Image[]>}

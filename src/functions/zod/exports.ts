@@ -1,5 +1,5 @@
 export { 
-  instanceOfArray, instanceOfBuffer, 
-  instanceOfNumber, instanceOfString
-} from "./instanceof";
-export { isUndefined } from "./directType";
+  isUndefined, isArray, 
+  isBuffer, isNumber,
+  isObject, isString
+} from "./isType";

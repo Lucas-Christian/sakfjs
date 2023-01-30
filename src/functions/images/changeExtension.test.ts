@@ -10,31 +10,31 @@ describe("#changeExtension", () => {
   test("Verifica se todos os erros ocorrem como esperado", async () => {
     try {
       await changeExtension(`${imagePath}2.png`, "" as any);
-    } catch(error) {
+    } catch(error: any) {
       expect(error.message).toBe("unsupportedImage");
     }
 
     try {
       await changeExtension(`${imagePath}2.png`, undefined as any);
-    } catch(error) {
+    } catch(error: any) {
       expect(error.message).toBe("unsupportedImage");
     }
 
     try {
       await changeExtension(`${imagePath}2.png`, 123 as any);
-    } catch(error) {
+    } catch(error: any) {
       expect(error.message).toBe("isNotString");
     }
 
     try {
       await changeExtension("C:/Users/User/Pictures/testImagesUnsupported/test.js", "jpg");
-    } catch(error) {
+    } catch(error: any) {
       expect(error.message).toBe("pathDoesNotLeadToBuffer");
     }
 
     try {
       await changeExtension("C:/Users/User/Pictures/testImagesUnsupported", "jpg");
-    } catch(error) {
+    } catch(error: any) {
       expect(error).toBeInstanceOf(Error);
     }
 

@@ -8,56 +8,55 @@ describe("#resizeImage", () => {
   test("Verifica se todos os erros ocorrem como esperado", async () => {
     try {
       await resizeImage(`${imagePath}2.png`, "" as any);
-    } catch(error) {
+    } catch(error: any) {
       expect(error.message).toBe("widthAndHeightIsNotInAnObject");
     }
 
     try {
       await resizeImage(`${imagePath}2.png`, undefined as any);
-    } catch(error) {
+    } catch(error: any) {
       expect(error.message).toBe("widthAndHeightIsNotInAnObject");
     }
 
     try {
       await resizeImage(`${imagePath}2.png`, null as any);
-    } catch(error) {
+    } catch(error: any) {
       expect(error.message).toBe("widthAndHeightIsNotInAnObject");
     }
-
     
     try {
       await resizeImage(`${imagePath}2.png`, {width: 10001, height: 400});
-    } catch(error) {
+    } catch(error: any) {
       expect(error.message).toBe("widthOrHeightInvalidQuantity");
     }
 
     try {
       await resizeImage(`${imagePath}2.png`, {width: 0, height: 400});
-    } catch(error) {
+    } catch(error: any) {
       expect(error.message).toBe("widthOrHeightInvalidQuantity");
     }
 
     try {
       await resizeImage(`${imagePath}2.png`, {width: 600, height: 10001});
-    } catch(error) {
+    } catch(error: any) {
       expect(error.message).toBe("widthOrHeightInvalidQuantity");
     }
 
     try {
       await resizeImage(`${imagePath}2.png`, {width: 600, height: 0});
-    } catch(error) {
+    } catch(error: any) {
       expect(error.message).toBe("widthOrHeightInvalidQuantity");
     }
 
     try {
       await resizeImage("C:/Users/User/Pictures/testImagesUnsupported/test.js", {width: 600, height: 400});
-    } catch(error) {
+    } catch(error: any) {
       expect(error.message).toBe("pathDoesNotLeadToBuffer");
     }
 
     try {
       await resizeImage("C:/Users/User/Pictures/testImagesUnsupported", {width: 600, height: 400});
-    } catch(error) {
+    } catch(error: any) {
       expect(error).toBeInstanceOf(Error);
     }
 

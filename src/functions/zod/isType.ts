@@ -1,4 +1,4 @@
-import { number, z } from "zod";
+import { z } from "zod";
 
 /**
  * @function isString

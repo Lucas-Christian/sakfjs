@@ -5,7 +5,7 @@ import { isString } from "../zod/isType";
 
 /**
  * @function isASupportedImage
- * @description check if a extension or mime has support for other functions of sakfuncs lib
+ * @description check if a extension or mime has support for other functions of sakjs funcs lib
  * 
  * @param {String} extOrMIMEType 
  * @returns {Boolean}

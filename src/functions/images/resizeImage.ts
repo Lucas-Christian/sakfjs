@@ -6,9 +6,6 @@ import { readFileSync } from "fs";
 import { getMIMEType } from "../files/getMIMEType";
 import { read, AUTO } from "jimp";
 
-
-type Options = { width: number, height: number, path: string };
-
 /**
  * @function resizeImage
  * @description change the size of an image(width and height) received as a buffer

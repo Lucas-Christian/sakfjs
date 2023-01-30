@@ -5,31 +5,31 @@ describe("#getSupportedImages", () => {
   test("Todos os erros esperados devem ser jogados", async () => {
     try {
       await getSupportedImages("C:/Users/User/Pictures/testImageEmpty");
-    } catch(error) {
+    } catch(error: any) {
       expect(error.message).toBe("emptyFolder")
     }
 
     try {
       await getSupportedImages("C:/Users/User/Pictures/testImagesUnsupported");
-    } catch(error) {
+    } catch(error: any) {
       expect(error.message).toBe("dontHasSupportedImages");
     }
 
     try {
       await getSupportedImages(123 as any);
-    } catch(error) {
+    } catch(error: any) {
       expect(error.message).toBe("folderPathEmptyOrIsNotString");
     }
 
     try {
       await getSupportedImages("");
-    } catch(error) {
+    } catch(error: any) {
       expect(error.message).toBe("folderPathEmptyOrIsNotString");
     }
 
     try {
       await getSupportedImages(undefined as any);
-    } catch(error) {
+    } catch(error: any) {
       expect(error.message).toBe("undefinedFolderPath");
     }
   });
