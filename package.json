@@ -1,6 +1,6 @@
 {
-  "name": "sakjs",
-  "version": "1.0.0",
+  "name": "sakfjs",
+  "version": "1.0.1",
   "description": "useful functions like a swiss army knife",
   "main": "lib/cjs/index.js",
   "module": "lib/esm/index.mjs",
