@@ -1,1 +1,0 @@
-export { getStat } from "./getStat";

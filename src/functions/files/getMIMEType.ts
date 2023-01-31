@@ -1,5 +1,5 @@
-import { isString } from "../zod/isType";
 import { mimeTypesByExt } from "../../constants/mimetypesByExt";
+import { isString } from "../zod/isString";
 import { parse } from "path";
 
 /**

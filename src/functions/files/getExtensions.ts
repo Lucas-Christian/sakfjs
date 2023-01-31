@@ -1,5 +1,5 @@
-import { isString } from "../zod/isType";
 import { extByMIMEType } from "../../constants/extByMIMEType";
+import { isString } from "../zod/isString";
 
 /**
  * @function getExtensions

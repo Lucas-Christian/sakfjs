@@ -1,10 +1,12 @@
 import type { SupportedMIMEType } from "../../constants/supportedFormats";
 import type { PathLike } from "fs";
-import { isBuffer, isNumber, isObject } from "../zod/isType";
 import { isASupportedImage } from "./isASupportedImage";
 import { readFileSync } from "fs";
 import { getMIMEType } from "../files/getMIMEType";
 import { read, AUTO } from "jimp";
+import { isBuffer } from "../zod/isBuffer";
+import { isNumber } from "../zod/isNumber";
+import { isObject } from "../zod/isObject";
 
 /**
  * @function resizeImage

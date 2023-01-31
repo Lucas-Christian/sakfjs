@@ -4,7 +4,7 @@ import { isASupportedImage } from "./isASupportedImage";
 import { getExtensions } from "../files/getExtensions";
 import { readFileSync } from "fs";
 import { getMIMEType } from "../files/getMIMEType";
-import { isBuffer } from "../zod/isType";
+import { isBuffer } from "../zod/isBuffer";
 import { read } from "jimp";
 
 /**

@@ -1,25 +1,17 @@
-export { 
-  getSupportedImages,
-  isASupportedImage,
-  changeExtension,
-  changeQuality,
-  resizeImage
-} from "./functions/images/exports";
+export { getSupportedImages } from "./functions/images/getSupportedImages";
+export { isASupportedImage } from "./functions/images/isASupportedImage";
+export { changeExtension } from "./functions/images/changeExtension";
+export { changeQuality } from "./functions/images/changeQuality";
+export { resizeImage } from "./functions/images/resizeImage";
 
-export {
-  getExtensions,
-  getMIMEType
-} from "./functions/files/exports";
+export { getExtensions } from "./functions/files/getExtensions";
+export { getMIMEType } from "./functions/files/getMIMEType";
 
-export {
-  isArray,
-  isBuffer,
-  isNumber,
-  isObject,
-  isString,
-  isUndefined
-} from "./functions/zod/exports";
+export { isUndefined } from "./functions/zod/isUndefined";
+export { isBuffer } from "./functions/zod/isBuffer";
+export { isNumber } from "./functions/zod/isNumber";
+export { isObject } from "./functions/zod/isObject";
+export { isString } from "./functions/zod/isString";
+export { isArray } from "./functions/zod/isArray";
 
-export {
-  getStat
-} from "./functions/fs/exports";
+export { getStat } from "./functions/fs/getStat";

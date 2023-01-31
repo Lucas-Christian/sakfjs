@@ -4,7 +4,8 @@ import { isASupportedImage } from "./isASupportedImage";
 import { join, parse } from "path";
 import { readdirSync } from "fs";
 import { getMIMEType } from "../files/getMIMEType";
-import { isString, isUndefined } from "../zod/isType";
+import { isUndefined } from "../zod/isUndefined";
+import { isString } from "../zod/isString";
 import { getStat } from "../fs/getStat";
 import { z } from "zod";
 
