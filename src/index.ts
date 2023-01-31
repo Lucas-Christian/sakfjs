@@ -1,8 +1,8 @@
-export { getSupportedImages } from "./functions/images/getSupportedImages";
-export { isASupportedImage } from "./functions/images/isASupportedImage";
-export { changeExtension } from "./functions/images/changeExtension";
-export { changeQuality } from "./functions/images/changeQuality";
-export { resizeImage } from "./functions/images/resizeImage";
+export { getSupportedImages } from "./functions/images/supportedImages/getSupportedImages/getSupportedImages";
+export { isASupportedImage } from "./functions/images/supportedImages/isASupportedImage/isASupportedImage";
+export { changeExtension } from "./functions/images/imageManipulation/changeExtension/changeExtension";
+export { changeQuality } from "./functions/images/imageManipulation/changeQuality/changeQuality";
+export { resizeImage } from "./functions/images/imageManipulation/resizeImage/resizeImage";
 
 export { getExtensions } from "./functions/files/getExtensions";
 export { getMIMEType } from "./functions/files/getMIMEType";

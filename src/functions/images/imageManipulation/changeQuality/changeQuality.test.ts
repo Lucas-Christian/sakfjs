@@ -1,7 +1,7 @@
 import { writeFileSync, unlinkSync } from "fs";
 import { describe, expect, test } from "vitest";
 import { changeQuality } from "./changeQuality";
-import { isBuffer } from "../zod/isBuffer";
+import { isBuffer } from "../../../zod/isBuffer";
 
 describe("#changeQuality", () => {
   let imagePath = "C:/Users/User/Pictures/testImage/image";

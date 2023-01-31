@@ -1,7 +1,7 @@
-import type { SupportedMIMEType, SupportedExt } from "../../constants/supportedFormats";
-import { supportedFormats } from "../../constants/supportedFormats";
-import { getMIMEType } from "../files/getMIMEType";
-import { isString } from "../zod/isString";
+import type { SupportedMIMEType, SupportedExt } from "../../../../constants/supportedFormats";
+import { supportedFormats } from "../../../../constants/supportedFormats";
+import { getMIMEType } from "../../../files/getMIMEType";
+import { isString } from "../../../zod/isString";
 
 /**
  * @function isASupportedImage

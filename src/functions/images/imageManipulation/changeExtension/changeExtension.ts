@@ -1,10 +1,10 @@
-import type { SupportedExt, SupportedMIMEType } from "../../constants/supportedFormats";
+import type { SupportedExt, SupportedMIMEType } from "../../../../constants/supportedFormats";
 import type { PathLike } from "fs";
-import { isASupportedImage } from "./isASupportedImage";
-import { getExtensions } from "../files/getExtensions";
+import { isASupportedImage } from "../../supportedImages/isASupportedImage/isASupportedImage";
+import { getExtensions } from "../../../files/getExtensions";
 import { readFileSync } from "fs";
-import { getMIMEType } from "../files/getMIMEType";
-import { isBuffer } from "../zod/isBuffer";
+import { getMIMEType } from "../../../files/getMIMEType";
+import { isBuffer } from "../../../zod/isBuffer";
 import { read } from "jimp";
 
 /**

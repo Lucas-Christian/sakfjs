@@ -1,11 +1,11 @@
-import type { SupportedMIMEType } from "../../constants/supportedFormats";
+import type { SupportedMIMEType } from "../../../../constants/supportedFormats";
 import type { PathLike } from "fs";
-import { isASupportedImage } from "./isASupportedImage";
+import { isASupportedImage } from "../../supportedImages/isASupportedImage/isASupportedImage";
 import { readFileSync } from "fs";
-import { getMIMEType } from "../files/getMIMEType";
+import { getMIMEType } from "../../../files/getMIMEType";
 import { read, AUTO } from "jimp";
-import { isBuffer } from "../zod/isBuffer";
-import { isNumber } from "../zod/isNumber";
+import { isBuffer } from "../../../zod/isBuffer";
+import { isNumber } from "../../../zod/isNumber";
 
 /**
  * @function changeQuality

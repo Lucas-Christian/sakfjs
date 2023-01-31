@@ -1,12 +1,12 @@
-import type { SupportedExt, SupportedMIMEType } from "../../constants/supportedFormats";
+import type { SupportedExt, SupportedMIMEType } from "../../../../constants/supportedFormats";
 import type { Stats } from "fs";
-import { isASupportedImage } from "./isASupportedImage";
+import { isASupportedImage } from "../isASupportedImage/isASupportedImage";
 import { join, parse } from "path";
 import { readdirSync } from "fs";
-import { getMIMEType } from "../files/getMIMEType";
-import { isUndefined } from "../zod/isUndefined";
-import { isString } from "../zod/isString";
-import { getStat } from "../fs/getStat";
+import { getMIMEType } from "../../../files/getMIMEType";
+import { isUndefined } from "../../../zod/isUndefined";
+import { isString } from "../../../zod/isString";
+import { getStat } from "../../../fs/getStat";
 import { z } from "zod";
 
 const ImageSchema = z.object({
