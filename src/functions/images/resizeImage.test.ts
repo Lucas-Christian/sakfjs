@@ -1,7 +1,7 @@
 import { writeFileSync, unlinkSync } from "fs";
 import { describe, expect, test } from "vitest";
 import { resizeImage } from "./resizeImage";
-import { isBuffer } from "../zod/isType";
+import { isBuffer } from "../zod/isBuffer";
 
 describe("#resizeImage", () => {
   let imagePath = "C:/Users/User/Pictures/testImage/image";

@@ -2,7 +2,7 @@ import { writeFileSync, unlinkSync } from "fs";
 import { describe, expect, test } from "vitest";
 import { changeExtension } from "./changeExtension";
 import { getMIMEType } from "../files/getMIMEType";
-import { isBuffer } from "../zod/isType";
+import { isBuffer } from "../zod/isBuffer";
 import { parse } from "path";
 
 describe("#changeExtension", () => {
