@@ -1,17 +1,17 @@
-export { getSupportedImages } from "./functions/images/supportedImages/getSupportedImages/getSupportedImages";
-export { isASupportedImage } from "./functions/images/supportedImages/isASupportedImage/isASupportedImage";
-export { changeExtension } from "./functions/images/imageManipulation/changeExtension/changeExtension";
-export { changeQuality } from "./functions/images/imageManipulation/changeQuality/changeQuality";
-export { resizeImage } from "./functions/images/imageManipulation/resizeImage/resizeImage";
+export { getSupportedImages } from "./resources/images/supportedImages/getSupportedImages/getSupportedImages";
+export { isASupportedImage } from "./resources/images/supportedImages/isASupportedImage/isASupportedImage";
+export { changeExtension } from "./resources/images/imageManipulation/changeExtension/changeExtension";
+export { changeQuality } from "./resources/images/imageManipulation/changeQuality/changeQuality";
+export { resizeImage } from "./resources/images/imageManipulation/resizeImage/resizeImage";
 
-export { getExtensions } from "./functions/files/getExtensions";
-export { getMIMEType } from "./functions/files/getMIMEType";
+export { getExtensions } from "./resources/files/getExtensions";
+export { getMIMEType } from "./resources/files/getMIMEType";
 
-export { isUndefined } from "./functions/zod/isUndefined";
-export { isBuffer } from "./functions/zod/isBuffer";
-export { isNumber } from "./functions/zod/isNumber";
-export { isObject } from "./functions/zod/isObject";
-export { isString } from "./functions/zod/isString";
-export { isArray } from "./functions/zod/isArray";
+export { isUndefined } from "./resources/zod/isUndefined";
+export { isBuffer } from "./resources/zod/isBuffer";
+export { isNumber } from "./resources/zod/isNumber";
+export { isObject } from "./resources/zod/isObject";
+export { isString } from "./resources/zod/isString";
+export { isArray } from "./resources/zod/isArray";
 
-export { getStat } from "./functions/fs/getStat";
+export { getStat } from "./resources/fs/getStat";
