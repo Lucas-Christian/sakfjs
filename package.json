@@ -13,7 +13,7 @@
     "clean": "rimraf ./lib",
     "test": "vitest",
     "coverage": "vitest --coverage",
-    "unitary": "vitest src/functions/zod/isType.test.ts"
+    "unitary": "vitest src/classes/JPEG/JPEGEncoder/JPEGEncoder.test.ts"
   },
   "license": "ISC",
   "devDependencies": {
