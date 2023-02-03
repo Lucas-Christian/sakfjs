@@ -3,7 +3,8 @@ import { isNumber } from "../../../resources/typeChecking/isNumber";
 import { isObject } from "../../../resources/typeChecking/isObject";
 
 type ImageType = { buffer: Buffer, width: number, height: number };
-type Pixel = { red: number, green: number, blue: number, alpha: number };
+type RGBPixel = { red: number, green: number, blue: number };
+type YCbCrPixel = { Y: number, Cb: number, Cr: number };
 
 export class JPEGEncoder {
   public encode(image: ImageType, quality: number = 50) {
@@ -26,8 +27,6 @@ export class JPEGEncoder {
     let encodedImage;
 
     pixelBlocks8x8.forEach((pixelBlock) => {
-      pixelBlock = this.remove128FromEachPixel(pixelBlock);
-
       let DCTCoefficients = this.calculateDCTForThePixelBlock(pixelBlock),
       quantizedDCTCoefficients = this.quantizeTheDCTCoefficients(DCTCoefficients),
       organizedQuantizedCoefficients = this.organizeQuantizedCoefficients(quantizedDCTCoefficients);
@@ -44,8 +43,8 @@ export class JPEGEncoder {
     return encodedImage;
   }
   private subdivideImageInto8x8PixelBlocks(buffer: Buffer) {
-    let pixelBlocks8x8: Pixel[][] = [];
-    let pixelBlock: Pixel[] = [];
+    let pixelBlocks8x8: YCbCrPixel[][] = [];
+    let pixelBlock: YCbCrPixel[] = [];
     let actualByte = 0;
 
     for(let i = 0;i <= buffer.length;i = i+4) {
@@ -55,22 +54,51 @@ export class JPEGEncoder {
         actualByte = 0;
       }
 
-      let pixel = {
+      let rgbPixel = {
         red: buffer[i],
         green: buffer[i + 1],
-        blue: buffer[i + 2],
-        alpha: buffer[i + 3]
-      }
+        blue: buffer[i + 2]
+      } as RGBPixel;
 
-      pixelBlock.push(pixel); 
+      let yCbCrPixel = transformRGBAToYCbCr(rgbPixel);
+
+      pixelBlock.push(yCbCrPixel); 
       actualByte++;
     }
     return pixelBlocks8x8;
+  
+    function transformRGBAToYCbCr({ red, green, blue }: RGBPixel) {
+      let pixel = {
+        Y: calculateY(),
+        Cb: calculateCb(),
+        Cr: calculateCr()
+      } as YCbCrPixel;
+
+      function calculateY() {
+        let calculateRed =(red << 6) + (red << 1),
+        calculateGreen = (green << 7) + green,
+        calculateBlue = (blue << 4) + (blue << 3) + blue;
+        return 16 + (calculateRed + calculateGreen + calculateBlue >> 8);
+      }
+      function calculateCb() {
+        let calculateRed = (red << 5) + (red << 2) + (red << 1),
+        calculateGreen = (green << 6) + (green << 3) + (green << 1),
+        calculateBlue = (blue << 7) - (blue << 4);
+
+        return 128 +((-((calculateRed) - (calculateGreen) + calculateBlue)) >> 8);
+      }
+      function calculateCr() {
+        let calculateRed = (red << 7) - (red << 4),
+        calculateGreen = (green << 6) + (green << 5) - (green << 1),
+        calculateBlue = (blue << 4) + (blue << 1);
+
+        return 128 + ((calculateRed - (calculateGreen) - (calculateBlue)) >> 8);
+      }
+
+      return pixel;
+    }
   }
-  private remove128FromEachPixel(pixelBlock) {
-    return pixelBlock.forEach((pixel) => pixel - 128);
-  }
-  private calculateDCTForThePixelBlock(pixelBlock) {
+  private calculateDCTForThePixelBlock(pixelBlock: YCbCrPixel[]) {
     let DCTCoefficients;
 
     return DCTCoefficients;

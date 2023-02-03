@@ -14,7 +14,19 @@
     "declaration": true,
     "rootDir": "../src",
     "checkJs": true,
-    "strict": true
+    "strict": true,
+    "paths": {
+      "@constants/*": [
+        "../src/constants/*"
+      ],
+      "@resources/*": [
+        "../src/resources/*"
+      ],
+      "@classes/*": [
+        "../src/classes/*"
+      ]
+    },
+    
   },
   "include": ["../src"],
   "exclude": ["../node_modules", "../vite.config.ts", "../src/**/*.test.ts"]

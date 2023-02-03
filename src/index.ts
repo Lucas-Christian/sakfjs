@@ -1,17 +1,16 @@
-export { getSupportedImages } from "./resources/images/supportedImages/getSupportedImages/getSupportedImages";
-export { isASupportedImage } from "./resources/images/supportedImages/isASupportedImage/isASupportedImage";
-export { changeExtension } from "./resources/images/imageManipulation/changeExtension/changeExtension";
-export { changeQuality } from "./resources/images/imageManipulation/changeQuality/changeQuality";
-export { resizeImage } from "./resources/images/imageManipulation/resizeImage/resizeImage";
+export { getSupportedImages } from "./resources/imageManipulation/getSupportedImages";
+export { isASupportedImage } from "./resources/imageManipulation/isASupportedImage";
+export { changeExtension } from "./resources/imageManipulation/changeExtension";
+export { changeQuality } from "./resources/imageManipulation/changeQuality";
+export { resizeImage } from "./resources/imageManipulation/resizeImage";
 
-export { getExtensions } from "./resources/files/getExtensions";
-export { getMIMEType } from "./resources/files/getMIMEType";
+export { getExtensions } from "./resources/native/getExtensions";
+export { getMIMEType } from "./resources/native/getMIMEType";
+export { getStat } from "./resources/native/getStat";
 
-export { isUndefined } from "./resources/zod/isUndefined";
-export { isBuffer } from "./resources/zod/isBuffer";
-export { isNumber } from "./resources/zod/isNumber";
-export { isObject } from "./resources/zod/isObject";
-export { isString } from "./resources/zod/isString";
-export { isArray } from "./resources/zod/isArray";
-
-export { getStat } from "./resources/fs/getStat";
+export { isUndefined } from "./resources/typeChecking/isUndefined";
+export { isBuffer } from "./resources/typeChecking/isBuffer";
+export { isNumber } from "./resources/typeChecking/isNumber";
+export { isObject } from "./resources/typeChecking/isObject";
+export { isString } from "./resources/typeChecking/isString";
+export { isArray } from "./resources/typeChecking/isArray";
