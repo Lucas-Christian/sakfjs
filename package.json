@@ -13,15 +13,15 @@
     "clean": "rimraf ./lib",
     "test": "vitest",
     "coverage": "vitest --coverage",
-    "unitary": "vitest src/classes/JPEG/JPEGEncoder/JPEGEncoder.test.ts"
+    "unitary": "vitest src/classes/JPEG/encode/encode.test.ts"
   },
   "license": "ISC",
   "devDependencies": {
-    "@vitest/coverage-c8": "^0.28.3",
+    "@vitest/coverage-c8": "^0.28.4",
     "dotenv": "^16.0.3",
     "rimraf": "^4.1.2",
     "typescript": "^4.9.5",
-    "vitest": "^0.28.3"
+    "vitest": "^0.28.4"
   },
   "dependencies": {
     "jimp": "^0.16.2",

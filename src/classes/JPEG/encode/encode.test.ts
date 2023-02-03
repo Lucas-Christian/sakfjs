@@ -1,11 +1,11 @@
 import { describe, test } from "vitest";
-import { JPEGEncoder } from ".";
+import { encode } from ".";
 
 type ImageType = { buffer: Buffer, width: number, height: number };
 
 let image = {
-  width: 4,
-  height: 4
+  width: 16,
+  height: 16
 } as ImageType;
 
 let buffer = Buffer.alloc(image.width * image.height * 4);
@@ -23,8 +23,7 @@ image.buffer = buffer;
 describe("#JPEGEncoder", () => {
   test("Verifica se o encoder funciona", () => {
     
-    let encoder = new JPEGEncoder();
-    encoder.encode(image, 60);
+    encode(image, 60);
     // let encodedImage = encoder.encode(image, 60);
 
     // console.log(encodedImage);
