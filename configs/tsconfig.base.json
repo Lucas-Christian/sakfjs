@@ -15,6 +15,7 @@
     "rootDir": "../src",
     "checkJs": true,
     "strict": true,
+    "baseUrl": ".",
     "paths": {
       "@constants/*": [
         "../src/constants/*"
@@ -24,10 +25,18 @@
       ],
       "@classes/*": [
         "../src/classes/*"
+      ],
+      "@imageManipulation/*": [
+        "../src/resources/imageManipulation/*"
+      ],
+      "@native/*": [
+        "../src/resources/native/*"
+      ],
+      "@typeChecking/*": [
+        "../src/resources/typeChecking/*"
       ]
     },
-    
   },
-  "include": ["../src"],
-  "exclude": ["../node_modules", "../vite.config.ts", "../src/**/*.test.ts"]
+  "include": ["../src/**/*.ts"],
+  "exclude": ["../node_modules", "../vite.config.ts"]
 }

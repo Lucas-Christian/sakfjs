@@ -1,0 +1,1 @@
+export const START_OF_IMAGE = 0xFFD8, END_OF_IMAGE = 0xFFD9;

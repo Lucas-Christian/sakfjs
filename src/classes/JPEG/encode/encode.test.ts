@@ -1,5 +1,6 @@
 import { describe, test } from "vitest";
-import { encode } from ".";
+import { JPEGEncoder } from ".";
+import { writeFileSync } from "fs";
 
 type ImageType = { buffer: Buffer, width: number, height: number };
 
@@ -22,10 +23,9 @@ image.buffer = buffer;
 
 describe("#JPEGEncoder", () => {
   test("Verifica se o encoder funciona", () => {
-    
-    encode(image, 60);
-    // let encodedImage = encoder.encode(image, 60);
+    let encoder = new JPEGEncoder();
 
-    // console.log(encodedImage);
+    let buffer = encoder.encode(image);
+    writeFileSync("image.jpg", buffer);
   });
 });
