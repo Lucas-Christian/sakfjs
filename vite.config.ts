@@ -5,7 +5,6 @@ export default defineConfig({
     exclude: ["node_modules"],
     coverage: {
       reporter: ["text", "html"]
-    },
-    globals: true
+    }
   }
-})
+});

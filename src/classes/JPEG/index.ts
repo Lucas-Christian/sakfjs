@@ -1,7 +1,13 @@
-import { decode } from "./decode";
-import { encode } from "./encode";
+import { JPEGDecoder } from "./JPEGDecoder";
+import { JPEGEncoder } from "./JPEGEncoder";
 
 export class JPEG {
-  public encode = encode;
-  public decode = decode;
+  constructor() {
+    let encoder = new JPEGEncoder();
+    let decoder = new JPEGDecoder();
+    this.encode = encoder.encode;
+    this.decode = decoder.decode;
+  }
+  public encode: JPEGEncoder["encode"];
+  public decode: JPEGDecoder["decode"];
 }
