@@ -1,4 +1,4 @@
-import { RGBPixel } from "../../../Base";
+import type { RGBPixel } from "../../../Base";
 
 export function calculateUDU(RGB_YUV_TABLE, image: RGBPixel) {
   let { red, green, blue } = image;

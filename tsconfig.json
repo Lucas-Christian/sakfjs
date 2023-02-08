@@ -1,0 +1,8 @@
+{
+  "extends": "./configs/tsconfig.base.json",
+  "compilerOptions": {
+    "lib": ["ES6", "DOM"],
+    "module": "CommonJS",
+    "target": "ES6",
+  },
+}

@@ -1,9 +1,10 @@
+import type { ImageType } from "./Base";
 import { END_OF_IMAGE, START_OF_IMAGE } from "./constants/headers";
-import { ImageType, Algorithm } from "./Algorithm";
-import { isUndefined } from "../../../resources/typeChecking/isUndefined";
-import { isBuffer } from "../../../resources/typeChecking/isBuffer";
-import { isNumber } from "../../../resources/typeChecking/isNumber";
-import { isObject } from "../../../resources/typeChecking/isObject";
+import { isUndefined } from "@typeChecking/isUndefined";
+import { Algorithm } from "./Algorithm";
+import { isBuffer } from "@typeChecking/isBuffer";
+import { isNumber } from "@typeChecking/isNumber";
+import { isObject } from "@typeChecking/isObject";
 
 export class JPEGEncoder extends Algorithm {
   constructor() {

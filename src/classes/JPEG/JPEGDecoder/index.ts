@@ -29,7 +29,7 @@ export class JPEGDecoder extends Algorithm {
       image = {
         width: this.width,
         height: this.height,
-        data: options.useTArray ?
+        buffer: options.useTArray ?
           new Uint8Array(bytesNeeded) :
           Buffer.alloc(bytesNeeded)
       };

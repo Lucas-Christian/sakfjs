@@ -1,6 +1,6 @@
 import { describe, test } from "vitest";
-import { JPEGEncoder } from ".";
 import { writeFileSync } from "fs";
+import { JPEGEncoder } from ".";
 
 type ImageType = { buffer: Buffer, width: number, height: number };
 

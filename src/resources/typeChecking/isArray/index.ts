@@ -7,6 +7,6 @@ import { z } from "zod";
  * @param {Array<Any>} type
  * @returns {Boolean}
  */
-export function isArray(type: any[]): boolean {
+export function isArray(type: any): boolean {
   return z.any().array().safeParse(type).success;
 }

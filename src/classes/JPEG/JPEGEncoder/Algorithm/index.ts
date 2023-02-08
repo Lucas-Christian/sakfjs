@@ -1,3 +1,4 @@
+import type { ImageType, RGBPixel } from "../Base";
 import { 
   std_dc_luminance_nrcodes, std_dc_luminance_values, 
   std_ac_luminance_nrcodes, std_ac_luminance_values 
@@ -6,7 +7,6 @@ import {
   std_dc_chrominance_nrcodes, std_dc_chrominance_values,
   std_ac_chrominance_nrcodes, std_ac_chrominance_values
 } from "../constants/chrominance";
-import { ImageType, RGBPixel } from "../Base";
 import { calculateDCT } from "./functions/calculateDCT";
 import { calculateYDU } from "./functions/calculateYDU";
 import { calculateUDU } from "./functions/calculateUDU";
@@ -189,7 +189,7 @@ export class Algorithm extends Init {
     }
   }
 
-  private processDU(CDU, fdtbl, DC, HTDC, HTAC) {
+  private processDU(CDU: any, fdtbl: any, DC: any, HTDC: any, HTAC: any) {
     let DU = new Array(64);
 
     let EOB = HTAC[0x00];

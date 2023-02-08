@@ -1,4 +1,4 @@
-export type ImageType = { buffer: Buffer; width: number; height: number; };
+export type ImageType = { buffer: Buffer | Uint8Array; width: number; height: number; };
 export type RGBPixel = { red: number; green: number; blue: number; };
 
 export abstract class Base {

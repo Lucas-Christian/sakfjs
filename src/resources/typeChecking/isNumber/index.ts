@@ -7,6 +7,6 @@ import { z } from "zod";
  * @param {Number} type
  * @returns {Boolean}
  */
-export function isNumber(type: number): boolean {
+export function isNumber(type: any): boolean {
   return z.number().safeParse(type).success && Number.isFinite(type);
 }

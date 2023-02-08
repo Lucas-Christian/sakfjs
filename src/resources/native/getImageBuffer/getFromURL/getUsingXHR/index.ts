@@ -1,6 +1,6 @@
 import { isBuffer } from "../../../../typeChecking/isBuffer";
 
-export async function loadUsingXHR(imageURL: string): Promise<Buffer> {
+export async function getUsingXHR(imageURL: string): Promise<Buffer> {
   return new Promise((resolve, reject) => {
     const xhr = new XMLHttpRequest();
     xhr.open("GET", imageURL, true);
@@ -8,7 +8,7 @@ export async function loadUsingXHR(imageURL: string): Promise<Buffer> {
     xhr.addEventListener("load", () => {
       if(xhr.status < 400) {
         try {
-          const data = Buffer.from(this.response);
+          const data = Buffer.from(xhr.response);
           if(isBuffer(data)) {
             return resolve(data);
           }

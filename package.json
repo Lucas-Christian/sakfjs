@@ -13,7 +13,7 @@
     "clean": "rimraf ./lib",
     "test": "vitest",
     "coverage": "vitest --coverage",
-    "unitary": "vitest src/classes/JPEG/JPEGDecoder/decode.test.ts"
+    "unitary": "vitest src/classes/SakfImage/SakfImage.test.ts"
   },
   "license": "ISC",
   "devDependencies": {
@@ -22,11 +22,12 @@
     "rimraf": "^4.1.2",
     "tsc-alias": "^1.8.2",
     "typescript": "^4.9.5",
+    "vite-tsconfig-paths": "^4.0.5",
     "vitest": "^0.28.4"
   },
   "dependencies": {
-    "jimp": "^0.16.2",
-    "zod": "^3.20.2"
+    "jimp": "^0.22.4",
+    "zod": "^3.20.3"
   },
   "exports": {
     ".": {

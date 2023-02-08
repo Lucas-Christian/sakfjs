@@ -7,6 +7,6 @@ import { z } from "zod";
  * @param {String} type
  * @returns {Boolean}
  */
-export function isString(type: string): boolean {
+export function isString(type: any): boolean {
   return z.string().safeParse(type).success;
 }

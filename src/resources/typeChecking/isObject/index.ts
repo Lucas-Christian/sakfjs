@@ -8,6 +8,6 @@ import { z } from "zod";
  * @param {undefined} type
  * @returns {Boolean}
  */
-export function isObject(type: {}): boolean {
+export function isObject(type: any): boolean {
   return !isBuffer(type as any) && z.object({}).safeParse(type).success;
 }

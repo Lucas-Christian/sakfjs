@@ -7,6 +7,6 @@ import { z } from "zod";
  * @param {Buffer | string | string[]} type
  * @returns {Boolean}
  */
-export function isBuffer(type: string | Buffer | string[]): boolean {
+export function isBuffer(type: any): boolean {
   return Buffer.isBuffer(type) && z.instanceof(Buffer).safeParse(type).success;
 }

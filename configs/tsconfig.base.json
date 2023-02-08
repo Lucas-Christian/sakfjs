@@ -20,9 +20,6 @@
       "@constants/*": [
         "../src/constants/*"
       ],
-      "@resources/*": [
-        "../src/resources/*"
-      ],
       "@classes/*": [
         "../src/classes/*"
       ],
@@ -36,7 +33,8 @@
         "../src/resources/typeChecking/*"
       ]
     },
+    "types": ["vite/client"]
   },
-  "include": ["../src/**/*.ts"],
-  "exclude": ["../node_modules", "../vite.config.ts"]
+  "include": ["../src/**/*.ts", "../vite.config.ts"],
+  "exclude": ["../node_modules"]
 }

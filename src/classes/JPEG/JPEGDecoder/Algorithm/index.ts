@@ -25,20 +25,18 @@ export class Algorithm extends Base {
 
     this.totalBytesAllocated = totalMemoryImpactBytes;
   }
-  protected parse(data) {
+  protected parse(buffer) {
     let maxResolutionInPixels = this.options.maxResolutionInMP * 1000 * 1000;
-    let offset = 0, length = data.length;
-
-
+    let offset = 0, length = buffer.length;
 
     function readUint16() {
-      let value = (data[offset] << 8) | data[offset + 1];
+      let value = (buffer[offset] << 8) | buffer[offset + 1];
       offset += 2;
       return value;
     }
     function readDataBlock() {
       let length = readUint16();
-      let array = data.subarray(offset, offset + length - 2);
+      let array = buffer.subarray(offset, offset + length - 2);
       offset += array.length;
       return array;
     }
@@ -170,13 +168,13 @@ export class Algorithm extends Base {
           let quantizationTablesLength = readUint16();
           let quantizationTablesEnd = quantizationTablesLength + offset - 2;
           while(offset < quantizationTablesEnd) {
-            let quantizationTableSpec = data[offset++];
+            let quantizationTableSpec = buffer[offset++];
             this.requestMemoryAllocation(64 * 4);
             let tableData = new Int32Array(64);
             if((quantizationTableSpec >> 4) === 0) { // 8 bit values
               for(j = 0; j < 64; j++) {
                 let z = dctZigZag[j];
-                tableData[z] = data[offset++];
+                tableData[z] = buffer[offset++];
               }
             } else if((quantizationTableSpec >> 4) === 1) { //16 bit
               for(j = 0; j < 64; j++) {
@@ -192,11 +190,11 @@ export class Algorithm extends Base {
         case 0xFFC0: // SOF0 (Start of Frame, Baseline DCT)
         case 0xFFC1: // SOF1 (Start of Frame, Extended DCT)
         case 0xFFC2: // SOF2 (Start of Frame, Progressive DCT)
-          readUint16(); // skip data length
+          readUint16(); // skip buffer length
           frame = {};
           frame.extended = (fileMarker === 0xFFC1);
           frame.progressive = (fileMarker === 0xFFC2);
-          frame.precision = data[offset++];
+          frame.precision = buffer[offset++];
           frame.scanLines = readUint16();
           frame.samplesPerLine = readUint16();
           frame.components = {};
@@ -208,13 +206,13 @@ export class Algorithm extends Base {
             throw new Error(`maxResolutionInMP limit exceeded by ${exceededAmount}MP`);
           }
 
-          let componentsCount = data[offset++], componentId;
+          let componentsCount = buffer[offset++], componentId;
           let maxH = 0, maxV = 0;
           for(i = 0; i < componentsCount; i++) {
-            componentId = data[offset];
-            let h = data[offset + 1] >> 4;
-            let v = data[offset + 1] & 15;
-            let qId = data[offset + 2];
+            componentId = buffer[offset];
+            let h = buffer[offset + 1] >> 4;
+            let v = buffer[offset + 1] & 15;
+            let qId = buffer[offset + 2];
 
             if( h <= 0 || v <= 0 ) {
               throw new Error('Invalid sampling factor, expected values above 0');
@@ -235,16 +233,16 @@ export class Algorithm extends Base {
         case 0xFFC4: // DHT (Define Huffman Tables)
           let huffmanLength = readUint16();
           for(i = 2; i < huffmanLength;) {
-            let huffmanTableSpec = data[offset++];
+            let huffmanTableSpec = buffer[offset++];
             let codeLengths = new Uint8Array(16);
             let codeLengthSum = 0;
             for(j = 0; j < 16; j++, offset++) {
-              codeLengthSum += (codeLengths[j] = data[offset]);
+              codeLengthSum += (codeLengths[j] = buffer[offset]);
             }
             this.requestMemoryAllocation(16 + codeLengthSum);
             let huffmanValues = new Uint8Array(codeLengthSum);
             for(j = 0; j < codeLengthSum; j++, offset++)
-              huffmanValues[j] = data[offset];
+              huffmanValues[j] = buffer[offset];
             i += 17 + codeLengthSum;
 
             let huffmanTableToAccess = ((huffmanTableSpec >> 4) === 0 ? huffmanTablesDC : huffmanTablesAC) as any;
@@ -254,30 +252,30 @@ export class Algorithm extends Base {
           break;
 
         case 0xFFDD: // DRI (Define Restart Interval)
-          readUint16(); // skip data length
+          readUint16(); // skip buffer length
           resetInterval = readUint16();
           break;
 
         case 0xFFDC: // Number of Lines marker
-          readUint16() // skip data length
-          readUint16() // Ignore this data since it represents the image height
+          readUint16() // skip buffer length
+          readUint16() // Ignore this buffer since it represents the image height
           break;
           
         case 0xFFDA: // SOS (Start of Scan)
           let scanLength = readUint16();
-          let selectorsCount = data[offset++];
+          let selectorsCount = buffer[offset++];
           let components: any[] = [], component;
           for(i = 0; i < selectorsCount; i++) {
-            component = frame.components[data[offset++]];
-            let tableSpec = data[offset++];
+            component = frame.components[buffer[offset++]];
+            let tableSpec = buffer[offset++];
             component.huffmanTableDC = huffmanTablesDC[tableSpec >> 4];
             component.huffmanTableAC = huffmanTablesAC[tableSpec & 15];
             components.push(component);
           }
-          let spectralStart = data[offset++];
-          let spectralEnd = data[offset++];
-          let successiveApproximation = data[offset++];
-          let processed = this.decodeScan(data, offset,
+          let spectralStart = buffer[offset++];
+          let spectralEnd = buffer[offset++];
+          let successiveApproximation = buffer[offset++];
+          let processed = this.decodeScan(buffer, offset,
             frame, components, resetInterval,
             spectralStart, spectralEnd,
             successiveApproximation >> 4, successiveApproximation & 15, this.options);
@@ -285,13 +283,13 @@ export class Algorithm extends Base {
           break;
 
         case 0xFFFF: // Fill bytes
-          if(data[offset] !== 0xFF) { // Avoid skipping a valid marker.
+          if(buffer[offset] !== 0xFF) { // Avoid skipping a valid marker.
             offset--;
           }
           break;
         default:
-          if(data[offset - 3] == 0xFF &&
-              data[offset - 2] >= 0xC0 && data[offset - 2] <= 0xFE) {
+          if(buffer[offset - 3] == 0xFF &&
+              buffer[offset - 2] >= 0xC0 && buffer[offset - 2] <= 0xFE) {
             // could be incorrect encoding -- last 0xFF byte of the previous
             // block was eaten by the encoder
             offset -= 3;
@@ -305,7 +303,7 @@ export class Algorithm extends Base {
             }
             malformedDataOffset = offset - 1;
             const nextOffset = readUint16();
-            if(data[offset + nextOffset - 2] === 0xFF) {
+            if(buffer[offset + nextOffset - 2] === 0xFF) {
               offset += nextOffset - 2;
               break;
             }
@@ -342,15 +340,15 @@ export class Algorithm extends Base {
   }
   protected copyToImageData(imageData, formatAsRGBA) {
     let width = imageData.width, height = imageData.height;
-    let imageDataArray = imageData.data;
-    let data = this.getData(width, height);
+    let imageDataArray = imageData.buffer;
+    let buffer = this.getData(width, height);
     let i = 0, j = 0, x, y;
     let Y, K, C, M, R, G, B;
     switch (this.components.length) {
       case 1:
         for(y = 0; y < height; y++) {
           for(x = 0; x < width; x++) {
-            Y = data[i++];
+            Y = buffer[i++];
 
             imageDataArray[j++] = Y;
             imageDataArray[j++] = Y;
@@ -364,9 +362,9 @@ export class Algorithm extends Base {
       case 3:
         for(y = 0; y < height; y++) {
           for(x = 0; x < width; x++) {
-            R = data[i++];
-            G = data[i++];
-            B = data[i++];
+            R = buffer[i++];
+            G = buffer[i++];
+            B = buffer[i++];
 
             imageDataArray[j++] = R;
             imageDataArray[j++] = G;
@@ -380,10 +378,10 @@ export class Algorithm extends Base {
       case 4:
         for(y = 0; y < height; y++) {
           for(x = 0; x < width; x++) {
-            C = data[i++];
-            M = data[i++];
-            Y = data[i++];
-            K = data[i++];
+            C = buffer[i++];
+            M = buffer[i++];
+            Y = buffer[i++];
+            K = buffer[i++];
 
             R = 255 - clampTo8bit(C * (1 - K / 255) + K);
             G = 255 - clampTo8bit(M * (1 - K / 255) + K);
@@ -402,7 +400,7 @@ export class Algorithm extends Base {
         throw new Error('Unsupported color mode');
     }
   }
-  private decodeScan(data, offset, frame, components, resetInterval, spectralStart, spectralEnd, successivePrev, successive, opts) {
+  private decodeScan(buffer, offset, frame, components, resetInterval, spectralStart, spectralEnd, successivePrev, successive, opts) {
     let mcusPerLine = frame.mcusPerLine;
     let progressive = frame.progressive;
 
@@ -412,9 +410,9 @@ export class Algorithm extends Base {
         bitsCount--;
         return (bitsData >> bitsCount) & 1;
       }
-      bitsData = data[offset++];
+      bitsData = buffer[offset++];
       if(bitsData == 0xFF) {
-        let nextByte = data[offset++];
+        let nextByte = buffer[offset++];
         if(nextByte) {
           throw new Error("unexpected marker: " + ((bitsData << 8) | nextByte).toString(16));
         }
@@ -633,18 +631,18 @@ export class Algorithm extends Base {
       if(mcu === mcuExpected) {
         // Skip trailing bytes at the end of the scan - until we reach the next marker
         do {
-          if(data[offset] === 0xFF) {
-            if(data[offset + 1] !== 0x00) {
+          if(buffer[offset] === 0xFF) {
+            if(buffer[offset + 1] !== 0x00) {
               break;
             }
           }
           offset += 1;
-        } while(offset < data.length - 2);
+        } while(offset < buffer.length - 2);
       }
 
       // find marker
       bitsCount = 0;
-      marker = (data[offset] << 8) | data[offset + 1];
+      marker = (buffer[offset] << 8) | buffer[offset + 1];
       if(marker < 0xFF00) {
         throw new Error("marker was not found");
       }
@@ -669,7 +667,7 @@ export class Algorithm extends Base {
     let colorTransform;
     let dataLength = width * height * this.components.length;
     this.requestMemoryAllocation(dataLength);
-    let data = new Uint8Array(dataLength);
+    let buffer = new Uint8Array(dataLength);
     switch (this.components.length) {
       case 1:
         component1 = this.components[0];
@@ -678,12 +676,12 @@ export class Algorithm extends Base {
           for(x = 0; x < width; x++) {
             Y = component1Line[0 | (x * component1.scaleX * scaleX)];
 
-            data[offset++] = Y;
+            buffer[offset++] = Y;
           }
         }
         break;
       case 2:
-        // PDF might compress two component data in custom colorspace
+        // PDF might compress two component buffer in custom colorspace
         component1 = this.components[0];
         component2 = this.components[1];
         for(y = 0; y < height; y++) {
@@ -691,9 +689,9 @@ export class Algorithm extends Base {
           component2Line = component2.lines[0 | (y * component2.scaleY * scaleY)];
           for(x = 0; x < width; x++) {
             Y = component1Line[0 | (x * component1.scaleX * scaleX)];
-            data[offset++] = Y;
+            buffer[offset++] = Y;
             Y = component2Line[0 | (x * component2.scaleX * scaleX)];
-            data[offset++] = Y;
+            buffer[offset++] = Y;
           }
         }
         break;
@@ -728,9 +726,9 @@ export class Algorithm extends Base {
               B = clampTo8bit(Y + 1.772 * (Cb - 128));
             }
 
-            data[offset++] = R;
-            data[offset++] = G;
-            data[offset++] = B;
+            buffer[offset++] = R;
+            buffer[offset++] = G;
+            buffer[offset++] = B;
           }
         }
         break;
@@ -770,17 +768,17 @@ export class Algorithm extends Base {
               M = 255 - clampTo8bit(Y - 0.3441363 * (Cb - 128) - 0.71413636 * (Cr - 128));
               Ye = 255 - clampTo8bit(Y + 1.772 * (Cb - 128));
             }
-            data[offset++] = 255-C;
-            data[offset++] = 255-M;
-            data[offset++] = 255-Ye;
-            data[offset++] = 255-K;
+            buffer[offset++] = 255-C;
+            buffer[offset++] = 255-M;
+            buffer[offset++] = 255-Ye;
+            buffer[offset++] = 255-K;
           }
         }
         break;
       default:
         throw new Error('Unsupported color mode');
     }
-    return data;
+    return buffer;
   }
   private buildComponentData(component) {
     let lines: Uint8Array[] = [];
