@@ -4,7 +4,7 @@ import { SakfImage } from ".";
 import { JPEGEncoder } from "../JPEG/JPEGEncoder";
 
 describe("#SakfImage", () => {
-  test("Verifica se o decoder funciona", async () => {
+  test("Verifica se o resize funciona", async () => {
     let sakfImage = new SakfImage("C:/Users/User/Desktop/Lucas/repositories/publics/sakfjs/image.jpg");
     let resizedImage = await sakfImage.resize(8, 8);
 
