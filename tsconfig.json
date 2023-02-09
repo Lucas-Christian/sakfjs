@@ -1,8 +1,26 @@
 {
-  "extends": "./configs/tsconfig.base.json",
   "compilerOptions": {
-    "lib": ["ES6", "DOM"],
+    "forceConsistentCasingInFileNames": true,
+    "allowSyntheticDefaultImports": true,
+    "importsNotUsedAsValues": "error",
+    "noUnusedParameters": true,
+    "resolveJsonModule": true,
+    "strictNullChecks": true,
+    "esModuleInterop": true,
+    "declarationMap": true,
+    "noUnusedLocals": true,
+    "noImplicitAny": true,                   
+    "skipLibCheck": true,
+    "declaration": true,
+    "rootDir": "./src",
+    "checkJs": true,
+    "strict": true,
+    "baseUrl": ".",
+    "types": ["vite/client"],
+    "lib": ["DOM", "ES6"],
     "module": "CommonJS",
-    "target": "ES6",
+    "target": "ES6"
   },
+  "include": ["./src/**/*.ts"],
+  "exclude": ["./node_modules", "vite.config.ts"]
 }

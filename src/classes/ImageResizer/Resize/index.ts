@@ -68,6 +68,7 @@ export class Resize {
       this.targetWidth > 0 &&
       this.targetHeight > 0
     ) {
+      
       this.configurePasses();
     } else {
       throw new Error("Invalid settings specified for the resizer.");

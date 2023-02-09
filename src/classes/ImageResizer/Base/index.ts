@@ -1,7 +1,11 @@
-import { ImageDecoder } from "@classes/ImageDecoder";
-
-export class Base extends ImageDecoder {
+export class Base {
+  protected bitmap = {
+    width: undefined as any,
+    height: undefined as any,
+    buffer: undefined as any
+  }
+  protected path;
   constructor(path: string) {
-    super(path);
+    this.path = path;
   }
 }

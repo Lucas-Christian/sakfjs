@@ -16,23 +16,6 @@
     "checkJs": true,
     "strict": true,
     "baseUrl": ".",
-    "paths": {
-      "@constants/*": [
-        "../src/constants/*"
-      ],
-      "@classes/*": [
-        "../src/classes/*"
-      ],
-      "@imageManipulation/*": [
-        "../src/resources/imageManipulation/*"
-      ],
-      "@native/*": [
-        "../src/resources/native/*"
-      ],
-      "@typeChecking/*": [
-        "../src/resources/typeChecking/*"
-      ]
-    },
     "types": ["vite/client"]
   },
   "include": ["../src/**/*.ts", "../vite.config.ts"],

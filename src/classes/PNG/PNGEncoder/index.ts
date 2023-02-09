@@ -1,4 +1,4 @@
-import type { ImageType } from "@classes/JPEG/JPEGEncoder/Base";
+import type { ImageType } from "../../JPEG/JPEGEncoder/Base";
 
 export class PNGEncoder {
   constructor() {

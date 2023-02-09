@@ -1,8 +1,9 @@
 import { resizeOperations } from "./resizeOperations";
-import { isUndefined } from "@typeChecking/isUndefined";
-import { isNumber } from "@typeChecking/isNumber";
+import { isUndefined } from "../../resources/typeChecking/isUndefined";
+import { isNumber } from "../../resources/typeChecking/isNumber";
 import { Resize } from "./Resize";
 import { Base } from "./Base";
+import { ImageDecoder } from "../ImageDecoder";
 
 export const AUTO = -1;
 
@@ -11,13 +12,23 @@ type ResizeMode = "nearestNeighbor" |
 "hermiteInterpolation" | "bezierInterpolation";
 
 export class ImageResizer extends Base {
+  constructor(path: string) {
+    super(path);
+  }
   /**
    * Resizes the image to a set width and height using a 2-pass bilinear algorithm
    * @param {number} width the width to resize the image to (or Jimp.AUTO)
    * @param {number} height the height to resize the image to (or Jimp.AUTO)
    * @param {string} mode (optional) a scaling method (e.g. Jimp.RESIZE_BEZIER)
    */
-  resize(width: number, height: number, mode?: ResizeMode) {
+  async resize(width: number, height: number, mode?: ResizeMode) {
+    let decoder = new ImageDecoder(this.path);
+    let decodedImage = await decoder.decode();
+
+    this.bitmap.width = decodedImage.width;
+    this.bitmap.height = decodedImage.height;
+    this.bitmap.buffer = decodedImage.buffer;
+
     if(!isNumber(width) || !isNumber(height)) {
       throw new Error("widthOrHeightIsNotNumber");
     } else if(width === AUTO && height === AUTO) {
@@ -53,9 +64,12 @@ export class ImageResizer extends Base {
         true,
         true,
         (buffer: Buffer) => {
-          this.bitmap.buffer = Buffer.from(buffer);
-          this.bitmap.width = width;
-          this.bitmap.height = height;
+          let image = {
+            buffer: Buffer.from(buffer),
+            width: width,
+            height: height
+          }
+          this.bitmap = image;
         }
       );
       resize.resize(this.bitmap.buffer);

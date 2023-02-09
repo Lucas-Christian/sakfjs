@@ -1,6 +1,6 @@
-import { isASupportedImage } from "@imageManipulation/isASupportedImage";
-import { getMIMEType } from "@native/getMIMEType";
-import { isString } from "@typeChecking/isString";
+import { isASupportedImage } from "../../../resources/imageManipulation/isASupportedImage/index";
+import { getMIMEType } from "../../../resources/native/getMIMEType/index";
+import { isString } from "../../../resources/typeChecking/isString/index";
 import { parse } from "path";
 
 export class Base {

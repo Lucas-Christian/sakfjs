@@ -1,9 +1,9 @@
-import { isASupportedImage } from "@imageManipulation/isASupportedImage";
-import { getMIMEType } from "@native/getMIMEType";
-import { isBuffer } from "@typeChecking/isBuffer";
-import { isNumber } from "@typeChecking/isNumber";
-import { isObject } from "@typeChecking/isObject";
-import { isString } from "@typeChecking/isString";
+import { isASupportedImage } from "../../../resources/imageManipulation/isASupportedImage";
+import { getMIMEType } from "../../../resources/native/getMIMEType";
+import { isBuffer } from "../../../resources/typeChecking/isBuffer";
+import { isNumber } from "../../../resources/typeChecking/isNumber";
+import { isObject } from "../../../resources/typeChecking/isObject";
+import { isString } from "../../../resources/typeChecking/isString";
 
 export type Bitmap = {
   width: number;
@@ -14,7 +14,11 @@ export type Bitmap = {
 export class Base {
   #path: string = undefined as any;
   #mime: string = undefined as any;
-  #bitmap: Bitmap = undefined as any;
+  #bitmap: Bitmap = {
+    buffer: undefined as any,
+    height: undefined as any,
+    width: undefined as any
+  }
 
   constructor(path: string) {
     this.path = path;
@@ -42,33 +46,22 @@ export class Base {
     }
     let { buffer, height, width } = bitmap;
     
-    this.buffer = buffer;
-    this.height = height;
-    this.width = width;
-  }
-  protected set width(width: number) {
-    if(!isNumber(width)) {
-      throw new Error("widthIsNotNumber");
-    } else if(width < 1 || width > 10000) {
-      throw new Error("widthInvalidQuantity");
+    if(!isBuffer(buffer)) {
+      throw new Error("bufferIsNotBuffer");
     }
-    this.#bitmap.width = width;
-  }
-  protected set height(height: number) {
     if(!isNumber(height)) {
       throw new Error("widthIsNotNumber");
     } else if(height < 1 || height > 10000) {
       throw new Error("widthInvalidQuantity");
     }
-    this.#bitmap.height = height;
-  }
-  protected set buffer(buffer: Buffer | Uint8Array) {
-    if(!isBuffer(buffer)) {
-      throw new Error("bufferIsNotBuffer");
+    if(!isNumber(width)) {
+      throw new Error("widthIsNotNumber");
+    } else if(width < 1 || width > 10000) {
+      throw new Error("widthInvalidQuantity");
     }
-    this.#bitmap.buffer = buffer;
+    
+    this.#bitmap = bitmap;
   }
-
   public get path() {
     return this.#path;
   }
@@ -77,5 +70,14 @@ export class Base {
   }
   public get bitmap() {
     return this.#bitmap;
+  }
+  public get buffer() {
+    return this.#bitmap.buffer;
+  }
+  public get width() {
+    return this.#bitmap.width;
+  }
+  public get height() {
+    return this.#bitmap.height;
   }
 }

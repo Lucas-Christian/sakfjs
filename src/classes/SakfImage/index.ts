@@ -1,9 +1,9 @@
-import { ImageResizer } from "@classes/ImageResizer";
-import { getImageBuffer } from "@native/getImageBuffer";
-import { isString } from "@typeChecking/isString";
+import { getImageBuffer } from "../../resources/native/getImageBuffer/index";
+import { ImageResizer } from "../ImageResizer/index";
+import { isString } from "../../resources/typeChecking/isString/index";
 import { Base } from "./Base";
-import { JPEG } from "@classes/JPEG";
-import { PNG } from "@classes/PNG";
+import { JPEG } from "../JPEG/index";
+import { PNG } from "../PNG/index";
 
 export class SakfImage extends Base {
   constructor(imagePath: string) {

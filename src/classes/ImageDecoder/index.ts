@@ -1,14 +1,13 @@
-import { JPEGDecoder } from "@classes/JPEG/JPEGDecoder";
-import { PNGDecoder } from "@classes/PNG/PNGDecoder";
-import { getImageBuffer } from "@native/getImageBuffer";
+import { getImageBuffer } from "../../resources/native/getImageBuffer";
+import { JPEGDecoder } from "../JPEG/JPEGDecoder";
+import { PNGDecoder } from "../PNG/PNGDecoder";
 import { Base } from "./Base";
 
 export class ImageDecoder extends Base {
   constructor(path: string) {
     super(path);
-    this.decode();
   }
-  private async decode() {
+  public async decode() {
     let imageBuffer = await getImageBuffer(this.path);
     const decoders = {
       "image/jpeg": () => {
@@ -24,8 +23,14 @@ export class ImageDecoder extends Base {
     decodedImage = decodeImage();
 
     let { width, height, buffer } = decodedImage;
-    this.width = width;
-    this.height = height;
-    this.buffer = buffer;
+
+    let image = {
+      width: width,
+      height: height,
+      buffer: buffer
+    }
+    this.bitmap = image;
+
+    return image;
   }
 }
